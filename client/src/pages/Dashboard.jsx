@@ -1,21 +1,27 @@
 import { useAuth } from '../context/AuthContext';
+import RoleBadge from '../components/RoleBadge';
+import TenantDashboard from './TenantDashboard';
+import OwnerDashboard from './OwnerDashboard';
 
 export default function Dashboard() {
   const { user } = useAuth();
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
-      <h1 className="text-2xl font-bold text-slate-900">
-        Welcome, {user.name}!
-      </h1>
-      <p className="text-slate-600 mt-2">
-        You are logged in as a{' '}
-        <span className="font-semibold">{user.role}</span>.
-      </p>
+    <div className="max-w-6xl mx-auto px-6 py-10">
+      <div className="flex items-start justify-between flex-wrap gap-4">
+        <div>
+          <h1 className="text-3xl font-bold text-slate-900">
+            Welcome back, {user.name}
+          </h1>
+          <p className="mt-1 text-slate-600">
+            Your {user.role === 'owner' ? 'Owner' : 'Tenant'} dashboard
+          </p>
+        </div>
+        <RoleBadge role={user.role} />
+      </div>
 
-      <div className="mt-6 bg-white border border-slate-200 rounded-lg p-4 text-sm text-slate-500">
-        Property browsing, favorites, and roommate features will appear here in
-        later steps.
+      <div className="mt-8">
+        {user.role === 'owner' ? <OwnerDashboard /> : <TenantDashboard />}
       </div>
     </div>
   );

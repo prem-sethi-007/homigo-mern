@@ -11,11 +11,27 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="bg-white border-b border-slate-200">
+    <nav className="bg-white border-b border-slate-200 sticky top-0 z-10">
       <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
-        <Link to="/" className="text-xl font-bold text-slate-900">
-          HOMIGO
-        </Link>
+        <div className="flex items-center gap-6">
+          <Link to="/" className="text-xl font-bold text-slate-900">
+            HOMIGO
+          </Link>
+          <div className="hidden sm:flex items-center gap-5 text-sm">
+            <Link
+              to="/properties"
+              className="text-slate-600 hover:text-slate-900"
+            >
+              Browse
+            </Link>
+            <Link
+              to="/roommates"
+              className="text-slate-600 hover:text-slate-900"
+            >
+              Roommates
+            </Link>
+          </div>
+        </div>
 
         <div className="flex items-center gap-3">
           {user ? (
