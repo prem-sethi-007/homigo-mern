@@ -38,6 +38,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+    favorites: {
+      type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Property' }],
+      default: [],
+    },
   },
   {
     timestamps: true,

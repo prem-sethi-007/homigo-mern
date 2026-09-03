@@ -44,7 +44,7 @@ export default function TenantDashboard() {
           icon={IcHeart}
           title="My Favorites"
           description="Properties you've saved to check out later."
-          comingSoon
+          to="/favorites"
         />
         <DashboardCard
           icon={IcProfile}

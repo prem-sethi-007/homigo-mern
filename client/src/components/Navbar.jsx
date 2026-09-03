@@ -40,6 +40,12 @@ export default function Navbar() {
                 Hi, <span className="font-semibold">{user.name}</span>
               </span>
               <Link
+                to="/favorites"
+                className="text-sm font-medium text-slate-700 hover:text-slate-900"
+              >
+                Favorites
+              </Link>
+              <Link
                 to="/dashboard"
                 className="text-sm font-medium text-slate-700 hover:text-slate-900"
               >
