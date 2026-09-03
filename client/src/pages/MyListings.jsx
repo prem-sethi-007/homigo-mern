@@ -66,17 +66,22 @@ export default function MyListings() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-10">
+    <div className="max-w-6xl mx-auto px-6 py-12">
       <div className="flex items-end justify-between flex-wrap gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900">My Listings</h1>
-          <p className="mt-1 text-slate-600">
-            Properties you've posted on HOMIGO.
+          <p className="text-xs uppercase tracking-widest text-brand font-semibold">
+            My Listings
+          </p>
+          <h1 className="mt-1 font-display text-3xl sm:text-4xl text-ink">
+            Properties you've posted
+          </h1>
+          <p className="mt-2 text-muted">
+            Manage rent, availability and details.
           </p>
         </div>
         <Link
           to="/properties/new"
-          className="text-sm font-medium bg-slate-900 text-white hover:bg-slate-800 px-4 py-2 rounded"
+          className="text-sm font-medium bg-brand text-white hover:bg-brand-dark px-5 py-2.5 rounded-md transition shadow-sm"
         >
           + Add property
         </Link>
@@ -85,10 +90,10 @@ export default function MyListings() {
       {flash && (
         <div
           className={
-            'mt-6 rounded-lg px-4 py-3 text-sm ' +
+            'mt-6 rounded-xl px-4 py-3 text-sm border ' +
             (flash.kind === 'success'
-              ? 'bg-emerald-50 border border-emerald-200 text-emerald-800'
-              : 'bg-red-50 border border-red-200 text-red-700')
+              ? 'bg-sage-soft/70 border-sage-soft text-sage-dark'
+              : 'bg-error-soft border-error-soft text-error-dark')
           }
         >
           <div className="flex items-start justify-between gap-3">
@@ -103,20 +108,20 @@ export default function MyListings() {
         </div>
       )}
 
-      <div className="mt-6">
+      <div className="mt-8">
         {state.status === 'loading' && (
-          <div className="text-sm text-slate-500">Loading your listings...</div>
+          <div className="text-sm text-muted">Loading your listings...</div>
         )}
 
         {state.status === 'error' && (
-          <div className="bg-white border border-red-200 rounded-xl p-6 text-center">
-            <p className="font-semibold text-red-700">
+          <div className="bg-white border border-error-soft rounded-2xl p-6 text-center">
+            <p className="font-semibold text-error-dark">
               Could not load your listings
             </p>
-            <p className="mt-1 text-sm text-slate-600">{state.message}</p>
+            <p className="mt-1 text-sm text-muted">{state.message}</p>
             <button
               onClick={load}
-              className="mt-4 bg-slate-900 text-white hover:bg-slate-800 px-4 py-2 rounded font-medium"
+              className="mt-4 bg-brand text-white hover:bg-brand-dark px-4 py-2 rounded-md font-medium transition"
             >
               Try again
             </button>
@@ -124,16 +129,16 @@ export default function MyListings() {
         )}
 
         {state.status === 'success' && state.properties.length === 0 && (
-          <div className="bg-white border border-slate-200 rounded-xl p-8 text-center">
-            <p className="font-semibold text-slate-900">
+          <div className="bg-white border border-line rounded-2xl p-10 text-center">
+            <p className="font-semibold text-ink">
               You haven't listed any properties yet
             </p>
-            <p className="mt-2 text-sm text-slate-600">
+            <p className="mt-2 text-sm text-muted">
               Add your first listing so tenants can find it.
             </p>
             <Link
               to="/properties/new"
-              className="inline-block mt-4 bg-slate-900 text-white hover:bg-slate-800 px-4 py-2 rounded font-medium"
+              className="inline-block mt-5 bg-brand text-white hover:bg-brand-dark px-4 py-2 rounded-md font-medium transition"
             >
               Add a property
             </Link>
@@ -141,20 +146,20 @@ export default function MyListings() {
         )}
 
         {state.status === 'success' && state.properties.length > 0 && (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {state.properties.map((p) => (
               <div key={p._id} className="flex flex-col gap-2">
                 <PropertyCard property={p} />
                 <div className="flex gap-2">
                   <Link
                     to={`/properties/${p._id}/edit`}
-                    className="flex-1 text-center text-sm font-medium bg-slate-100 hover:bg-slate-200 text-slate-800 px-3 py-2 rounded"
+                    className="flex-1 text-center text-sm font-medium bg-sand hover:bg-sand-soft text-ink px-3 py-2 rounded-md transition"
                   >
                     Edit
                   </Link>
                   <button
                     onClick={() => setToDelete(p)}
-                    className="flex-1 text-sm font-medium bg-white border border-red-200 text-red-700 hover:bg-red-50 px-3 py-2 rounded"
+                    className="flex-1 text-sm font-medium bg-white border border-error-soft text-error-dark hover:bg-error-soft px-3 py-2 rounded-md transition"
                   >
                     Delete
                   </button>

@@ -35,18 +35,21 @@ export default function Recommended() {
   useEffect(() => load(), []);
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-10">
+    <div className="max-w-6xl mx-auto px-6 py-12">
       <div className="flex items-end justify-between flex-wrap gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900">
-            Recommended for you
+          <p className="text-xs uppercase tracking-widest text-brand font-semibold">
+            Recommendations
+          </p>
+          <h1 className="mt-1 font-display text-3xl sm:text-4xl text-ink">
+            People we think you'll click with
           </h1>
-          <p className="mt-1 text-slate-600">
-            Suggestions based on your preferences.
+          <p className="mt-2 text-muted">
+            Ranked by your stated preferences — a suggestion, not a filter.
           </p>
         </div>
         {state.status === 'success' && !state.needsProfile && (
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-muted">
             {state.profiles.length} suggestion
             {state.profiles.length === 1 ? '' : 's'}
           </p>
@@ -55,30 +58,28 @@ export default function Recommended() {
 
       <RoommateTabs current="recommended" />
 
-      <div className="mt-4 text-xs text-slate-500 bg-slate-50 border border-slate-200 rounded-lg px-4 py-2">
+      <div className="mt-5 text-xs text-muted bg-sand-soft/60 border border-line rounded-xl px-4 py-2.5">
         Recommendations are based on your stated preferences. You can still{' '}
-        <Link to="/roommates" className="underline hover:text-slate-800">
+        <Link to="/roommates" className="underline text-brand hover:text-brand-dark">
           browse everyone
         </Link>
         .
       </div>
 
-      <div className="mt-6">
+      <div className="mt-8">
         {state.status === 'loading' && (
-          <div className="text-sm text-slate-500">
-            Loading recommendations...
-          </div>
+          <div className="text-sm text-muted">Loading recommendations...</div>
         )}
 
         {state.status === 'error' && (
-          <div className="bg-white border border-red-200 rounded-xl p-6 text-center">
-            <p className="font-semibold text-red-700">
+          <div className="bg-white border border-error-soft rounded-2xl p-6 text-center">
+            <p className="font-semibold text-error-dark">
               Could not load recommendations
             </p>
-            <p className="mt-1 text-sm text-slate-600">{state.message}</p>
+            <p className="mt-1 text-sm text-muted">{state.message}</p>
             <button
               onClick={load}
-              className="mt-4 bg-slate-900 text-white hover:bg-slate-800 px-4 py-2 rounded font-medium"
+              className="mt-4 bg-brand text-white hover:bg-brand-dark px-4 py-2 rounded-md font-medium transition"
             >
               Try again
             </button>
@@ -86,17 +87,17 @@ export default function Recommended() {
         )}
 
         {state.status === 'success' && state.needsProfile && (
-          <div className="bg-white border border-slate-200 rounded-xl p-8 text-center">
-            <p className="font-semibold text-slate-900">
+          <div className="bg-white border border-line rounded-2xl p-10 text-center">
+            <p className="font-semibold text-ink">
               Create your roommate profile to get recommendations
             </p>
-            <p className="mt-2 text-sm text-slate-600">
-              We use your preferences (city, budget, lifestyle) to rank other
+            <p className="mt-2 text-sm text-muted max-w-md mx-auto">
+              We use your preferences — city, budget, lifestyle — to rank other
               users for you.
             </p>
             <Link
               to="/roommate-profile"
-              className="inline-block mt-4 bg-slate-900 text-white hover:bg-slate-800 px-4 py-2 rounded font-medium"
+              className="inline-block mt-5 bg-brand text-white hover:bg-brand-dark px-4 py-2 rounded-md font-medium transition"
             >
               Create my profile
             </Link>
@@ -106,16 +107,16 @@ export default function Recommended() {
         {state.status === 'success' &&
           !state.needsProfile &&
           state.profiles.length === 0 && (
-            <div className="bg-white border border-slate-200 rounded-xl p-8 text-center">
-              <p className="font-semibold text-slate-900">
+            <div className="bg-white border border-line rounded-2xl p-10 text-center">
+              <p className="font-semibold text-ink">
                 No one to recommend yet
               </p>
-              <p className="mt-2 text-sm text-slate-600">
+              <p className="mt-2 text-sm text-muted">
                 Nobody else has posted a roommate profile — check back later.
               </p>
               <Link
                 to="/roommates"
-                className="inline-block mt-4 bg-slate-900 text-white hover:bg-slate-800 px-4 py-2 rounded font-medium"
+                className="inline-block mt-5 bg-brand text-white hover:bg-brand-dark px-4 py-2 rounded-md font-medium transition"
               >
                 Browse all
               </Link>
@@ -125,7 +126,7 @@ export default function Recommended() {
         {state.status === 'success' &&
           !state.needsProfile &&
           state.profiles.length > 0 && (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {state.profiles.map(({ profile, match }) => (
                 <RoommateCard
                   key={profile._id}

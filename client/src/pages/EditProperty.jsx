@@ -50,7 +50,7 @@ export default function EditProperty() {
 
   if (loadState.status === 'loading') {
     return (
-      <div className="max-w-3xl mx-auto px-6 py-10 text-sm text-slate-500">
+      <div className="max-w-3xl mx-auto px-6 py-12 text-sm text-muted">
         Loading property...
       </div>
     );
@@ -58,19 +58,19 @@ export default function EditProperty() {
 
   if (loadState.status === 'error') {
     return (
-      <div className="max-w-3xl mx-auto px-6 py-10">
-        <div className="bg-white border border-slate-200 rounded-xl p-8 text-center">
-          <p className="font-semibold text-slate-900">
+      <div className="max-w-3xl mx-auto px-6 py-12">
+        <div className="bg-white border border-line rounded-2xl p-10 text-center">
+          <p className="font-semibold text-ink">
             {loadState.notFound
               ? 'Property not found'
               : 'Could not load property'}
           </p>
           {!loadState.notFound && (
-            <p className="mt-2 text-sm text-slate-600">{loadState.message}</p>
+            <p className="mt-2 text-sm text-muted">{loadState.message}</p>
           )}
           <Link
             to="/properties/mine"
-            className="inline-block mt-4 bg-slate-900 text-white hover:bg-slate-800 px-4 py-2 rounded font-medium"
+            className="inline-block mt-5 bg-brand text-white hover:bg-brand-dark px-4 py-2 rounded-md font-medium transition"
           >
             Back to My Listings
           </Link>
@@ -86,19 +86,19 @@ export default function EditProperty() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-10">
+    <div className="max-w-3xl mx-auto px-6 py-12">
       <Link
         to="/properties/mine"
-        className="text-sm text-slate-600 hover:text-slate-900"
+        className="text-sm text-muted hover:text-ink transition"
       >
-        &larr; Back to My Listings
+        ← Back to My Listings
       </Link>
-      <h1 className="mt-4 text-2xl font-bold text-slate-900">Edit property</h1>
-      <p className="mt-1 text-sm text-slate-600">
-        Update the details for <span className="font-medium">{p.title}</span>.
+      <h1 className="mt-4 font-display text-3xl text-ink">Edit property</h1>
+      <p className="mt-2 text-sm text-muted">
+        Update the details for <span className="font-medium text-ink">{p.title}</span>.
       </p>
 
-      <div className="mt-6">
+      <div className="mt-8">
         <PropertyForm
           initial={p}
           submitLabel="Save changes"

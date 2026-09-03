@@ -11,12 +11,12 @@ const FURNISH_LABEL = {
 
 function formatRent(n) {
   if (typeof n !== 'number') return '';
-  return `₹${n.toLocaleString('en-IN')}/mo`;
+  return `₹${n.toLocaleString('en-IN')}`;
 }
 
 function Pill({ children }) {
   return (
-    <span className="text-xs bg-slate-100 text-slate-700 px-2 py-0.5 rounded">
+    <span className="text-xs bg-sand-soft text-ink px-2.5 py-1 rounded-full font-medium">
       {children}
     </span>
   );
@@ -24,7 +24,7 @@ function Pill({ children }) {
 
 function Placeholder() {
   return (
-    <div className="w-full aspect-[4/3] bg-slate-100 flex items-center justify-center text-slate-300">
+    <div className="w-full aspect-[4/3] bg-sand-soft flex items-center justify-center text-brand/40">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -104,7 +104,7 @@ export default function PropertyCard({ property }) {
   return (
     <Link
       to={`/properties/${_id}`}
-      className="block bg-white border border-slate-200 rounded-xl overflow-hidden hover:border-slate-400 hover:shadow-md transition"
+      className="block bg-white border border-line rounded-2xl overflow-hidden hover:border-brand/40 hover:shadow-md transition"
     >
       <div className="relative">
         {images && images[0] ? (
@@ -116,6 +116,19 @@ export default function PropertyCard({ property }) {
         ) : (
           <Placeholder />
         )}
+
+        <div className="absolute top-3 left-3 flex gap-1.5">
+          {available !== false ? (
+            <span className="text-xs font-medium bg-sage-soft text-sage-dark px-2.5 py-1 rounded-full">
+              Available
+            </span>
+          ) : (
+            <span className="text-xs font-medium bg-white/95 text-muted px-2.5 py-1 rounded-full">
+              Not available
+            </span>
+          )}
+        </div>
+
         <button
           type="button"
           onClick={handleHeart}
@@ -123,25 +136,19 @@ export default function PropertyCard({ property }) {
           aria-label={heartTitle}
           title={heartTitle}
           className={
-            'absolute top-2 right-2 w-9 h-9 rounded-full bg-white/95 hover:bg-white shadow flex items-center justify-center disabled:opacity-60 ' +
-            (favorited ? 'text-red-500' : 'text-slate-500')
+            'absolute top-3 right-3 w-9 h-9 rounded-full bg-white/95 hover:bg-white shadow flex items-center justify-center disabled:opacity-60 transition ' +
+            (favorited ? 'text-brand' : 'text-muted-soft')
           }
         >
           <HeartIcon filled={favorited} />
         </button>
       </div>
 
-      <div className="p-4">
-        <div className="flex items-start justify-between gap-2">
-          <h3 className="font-semibold text-slate-900 line-clamp-1">{title}</h3>
-          {available === false && (
-            <span className="text-xs font-medium bg-slate-100 text-slate-600 px-2 py-0.5 rounded whitespace-nowrap">
-              Not available
-            </span>
-          )}
-        </div>
-
-        {city && <p className="mt-1 text-sm text-slate-600">{city}</p>}
+      <div className="p-5">
+        <h3 className="font-semibold text-ink line-clamp-1 text-base">
+          {title}
+        </h3>
+        {city && <p className="mt-0.5 text-sm text-muted">{city}</p>}
 
         <div className="mt-3 flex flex-wrap gap-1.5">
           {type && <Pill>{TYPE_LABEL[type] || type}</Pill>}
@@ -153,12 +160,17 @@ export default function PropertyCard({ property }) {
           )}
         </div>
 
-        <div className="mt-4 flex items-end justify-between gap-2">
-          <p className="text-lg font-semibold text-slate-900">
-            {formatRent(rent)}
-          </p>
+        <div className="mt-5 flex items-end justify-between gap-2">
+          <div>
+            <p className="text-xl font-bold text-ink font-display">
+              {formatRent(rent)}
+              <span className="text-sm font-medium text-muted"> /mo</span>
+            </p>
+          </div>
           {owner && owner.name && (
-            <p className="text-xs text-slate-500 truncate">by {owner.name}</p>
+            <p className="text-xs text-muted-soft truncate max-w-[45%]">
+              by {owner.name}
+            </p>
           )}
         </div>
       </div>

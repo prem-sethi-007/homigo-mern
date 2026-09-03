@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import DashboardCard from '../components/DashboardCard';
 
 const IcSearch = (
@@ -27,7 +28,30 @@ const IcProfile = (
 export default function TenantDashboard() {
   return (
     <div>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="bg-brand text-white rounded-2xl p-6 sm:p-8 shadow-sm">
+        <div className="flex items-start justify-between gap-4 flex-wrap">
+          <div className="max-w-xl">
+            <p className="text-xs uppercase tracking-widest text-brand-soft">
+              Find your fit
+            </p>
+            <h2 className="mt-2 font-display text-2xl sm:text-3xl">
+              Discover homes and roommates
+            </h2>
+            <p className="mt-2 text-sm text-brand-soft/90">
+              Filter by city and budget, save what you love, and see who else
+              is looking to share.
+            </p>
+          </div>
+          <Link
+            to="/properties"
+            className="bg-white text-brand hover:bg-brand-soft px-5 py-2.5 rounded-md text-sm font-semibold transition shadow-sm whitespace-nowrap"
+          >
+            Browse properties
+          </Link>
+        </div>
+      </div>
+
+      <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <DashboardCard
           icon={IcSearch}
           title="Browse Properties"
@@ -54,12 +78,21 @@ export default function TenantDashboard() {
         />
       </div>
 
-      <div className="mt-8 bg-white border border-slate-200 rounded-xl p-6">
-        <h3 className="font-semibold text-slate-900">Getting started</h3>
-        <ul className="mt-3 space-y-2 text-sm text-slate-600 list-disc list-inside">
-          <li>Search for properties in the city where you're moving.</li>
-          <li>Save your favorites while you compare.</li>
-          <li>Set up your roommate profile so others can find you.</li>
+      <div className="mt-8 bg-white border border-line rounded-2xl p-6">
+        <h3 className="font-semibold text-ink">Getting started</h3>
+        <ul className="mt-3 space-y-2 text-sm text-muted">
+          <li className="flex items-start gap-2">
+            <span className="mt-2 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0" />
+            Search for properties in the city where you're moving.
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="mt-2 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0" />
+            Save your favorites while you compare.
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="mt-2 w-1.5 h-1.5 rounded-full bg-brand flex-shrink-0" />
+            Set up your roommate profile so others can find you.
+          </li>
         </ul>
       </div>
     </div>

@@ -117,7 +117,7 @@ export default function RoommateProfile() {
 
   if (state.status === 'loading') {
     return (
-      <div className="max-w-3xl mx-auto px-6 py-10 text-sm text-slate-500">
+      <div className="max-w-3xl mx-auto px-6 py-12 text-sm text-muted">
         Loading your roommate profile...
       </div>
     );
@@ -125,10 +125,10 @@ export default function RoommateProfile() {
 
   if (state.status === 'error') {
     return (
-      <div className="max-w-3xl mx-auto px-6 py-10">
-        <div className="bg-white border border-red-200 rounded-xl p-6 text-center">
-          <p className="font-semibold text-red-700">Could not load profile</p>
-          <p className="mt-1 text-sm text-slate-600">{state.message}</p>
+      <div className="max-w-3xl mx-auto px-6 py-12">
+        <div className="bg-white border border-error-soft rounded-2xl p-6 text-center">
+          <p className="font-semibold text-error-dark">Could not load profile</p>
+          <p className="mt-1 text-sm text-muted">{state.message}</p>
         </div>
       </div>
     );
@@ -137,34 +137,37 @@ export default function RoommateProfile() {
   const isEdit = state.status === 'hasProfile';
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-10">
+    <div className="max-w-3xl mx-auto px-6 py-12">
       <Link
         to="/dashboard"
-        className="text-sm text-slate-600 hover:text-slate-900"
+        className="text-sm text-muted hover:text-ink transition"
       >
-        &larr; Back to dashboard
+        ← Back to dashboard
       </Link>
 
       <div className="mt-4">
-        <h1 className="text-2xl font-bold text-slate-900">
-          {isEdit ? 'Roommate profile' : 'Create roommate profile'}
+        <p className="text-xs uppercase tracking-widest text-brand font-semibold">
+          Roommate profile
+        </p>
+        <h1 className="mt-1 font-display text-3xl text-ink">
+          {isEdit ? 'Your preferences' : 'Set your preferences'}
         </h1>
-        <p className="mt-1 text-sm text-slate-600">
+        <p className="mt-2 text-sm text-muted">
           {isEdit
-            ? 'Update your preferences so others can find a good match.'
+            ? "Update what you're looking for — matches update immediately."
             : 'Tell others your preferences so they can match with you.'}
         </p>
       </div>
 
       {flash && (
-        <div className="mt-4 rounded-lg px-4 py-3 text-sm bg-emerald-50 border border-emerald-200 text-emerald-800">
+        <div className="mt-5 rounded-xl px-4 py-3 text-sm bg-sage-soft/70 border border-sage-soft text-sage-dark">
           {flash}
         </div>
       )}
 
       <form
         onSubmit={handleSubmit}
-        className="mt-6 bg-white border border-slate-200 rounded-xl p-6 space-y-6"
+        className="mt-6 bg-white border border-line rounded-2xl p-6 space-y-6 shadow-sm"
       >
         <div className="grid gap-4 sm:grid-cols-3">
           <FormField
@@ -178,12 +181,12 @@ export default function RoommateProfile() {
             placeholder="e.g. 23"
           />
           <label className="block">
-            <span className="text-sm font-medium text-slate-700">Gender</span>
+            <span className="text-sm font-medium text-ink">Gender</span>
             <select
               name="gender"
               value={form.gender}
               onChange={updateField}
-              className="mt-1 w-full border border-slate-300 rounded px-3 py-2 bg-white"
+              className="mt-1.5 w-full border border-line rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-brand/50"
             >
               <option value="">Prefer not to say</option>
               <option value="male">Male</option>
@@ -238,12 +241,12 @@ export default function RoommateProfile() {
 
         <div className="grid gap-4 sm:grid-cols-3">
           <label className="block">
-            <span className="text-sm font-medium text-slate-700">Lifestyle</span>
+            <span className="text-sm font-medium text-ink">Lifestyle</span>
             <select
               name="lifestyle"
               value={form.lifestyle}
               onChange={updateField}
-              className="mt-1 w-full border border-slate-300 rounded px-3 py-2 bg-white"
+              className="mt-1.5 w-full border border-line rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-brand/50"
             >
               <option value="">Not specified</option>
               <option value="quiet">Quiet</option>
@@ -252,12 +255,12 @@ export default function RoommateProfile() {
             </select>
           </label>
           <label className="block">
-            <span className="text-sm font-medium text-slate-700">Smoking</span>
+            <span className="text-sm font-medium text-ink">Smoking</span>
             <select
               name="smoking"
               value={form.smoking}
               onChange={updateField}
-              className="mt-1 w-full border border-slate-300 rounded px-3 py-2 bg-white"
+              className="mt-1.5 w-full border border-line rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-brand/50"
             >
               <option value="">Not specified</option>
               <option value="no">No</option>
@@ -266,12 +269,12 @@ export default function RoommateProfile() {
             </select>
           </label>
           <label className="block">
-            <span className="text-sm font-medium text-slate-700">Pets</span>
+            <span className="text-sm font-medium text-ink">Pets</span>
             <select
               name="pets"
               value={form.pets}
               onChange={updateField}
-              className="mt-1 w-full border border-slate-300 rounded px-3 py-2 bg-white"
+              className="mt-1.5 w-full border border-line rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-brand/50"
             >
               <option value="">Not specified</option>
               <option value="no">No</option>
@@ -282,24 +285,24 @@ export default function RoommateProfile() {
         </div>
 
         <label className="block">
-          <span className="text-sm font-medium text-slate-700">Bio</span>
+          <span className="text-sm font-medium text-ink">Bio</span>
           <textarea
             name="bio"
             rows={4}
             value={form.bio}
             onChange={updateField}
-            className="mt-1 w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-500"
+            className="mt-1.5 w-full border border-line rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand/50 transition"
             placeholder="A short intro so people know what you're like..."
           />
         </label>
 
-        {error && <p className="text-sm text-red-600">{error}</p>}
+        {error && <p className="text-sm text-error-dark">{error}</p>}
 
         <div className="flex justify-end">
           <button
             type="submit"
             disabled={submitting}
-            className="text-sm font-medium bg-slate-900 text-white hover:bg-slate-800 px-4 py-2 rounded disabled:opacity-50"
+            className="text-sm font-medium bg-brand text-white hover:bg-brand-dark px-5 py-2 rounded-md disabled:opacity-50 transition shadow-sm"
           >
             {submitting
               ? 'Saving...'
