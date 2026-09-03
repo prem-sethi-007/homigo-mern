@@ -7,4 +7,8 @@ export const propertyService = {
   create: (data) => api.post('/properties', data).then((r) => r.data),
   update: (id, data) => api.put(`/properties/${id}`, data).then((r) => r.data),
   remove: (id) => api.delete(`/properties/${id}`).then((r) => r.data),
+
+  getFavorites: () => api.get('/favorites').then((r) => r.data),
+  addFavorite: (id) => api.post(`/favorites/${id}`).then((r) => r.data),
+  removeFavorite: (id) => api.delete(`/favorites/${id}`).then((r) => r.data),
 };

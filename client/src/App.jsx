@@ -13,6 +13,7 @@ import PropertyDetails from './pages/PropertyDetails';
 import NewProperty from './pages/NewProperty';
 import EditProperty from './pages/EditProperty';
 import MyListings from './pages/MyListings';
+import Favorites from './pages/Favorites';
 import Roommates from './pages/Roommates';
 
 export default function App() {
@@ -55,6 +56,14 @@ export default function App() {
               <Route path="/properties/:id" element={<PropertyDetails />} />
 
               <Route path="/roommates" element={<Roommates />} />
+              <Route
+                path="/favorites"
+                element={
+                  <ProtectedRoute>
+                    <Favorites />
+                  </ProtectedRoute>
+                }
+              />
               <Route
                 path="/dashboard"
                 element={
