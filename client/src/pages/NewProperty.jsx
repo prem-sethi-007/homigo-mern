@@ -22,21 +22,19 @@ export default function NewProperty() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-10">
+    <div className="max-w-3xl mx-auto px-6 py-12">
       <Link
         to="/dashboard"
-        className="text-sm text-slate-600 hover:text-slate-900"
+        className="text-sm text-muted hover:text-ink transition"
       >
-        &larr; Back to dashboard
+        ← Back to dashboard
       </Link>
-      <h1 className="mt-4 text-2xl font-bold text-slate-900">
-        Add a property
-      </h1>
-      <p className="mt-1 text-sm text-slate-600">
+      <h1 className="mt-4 font-display text-3xl text-ink">Add a property</h1>
+      <p className="mt-2 text-sm text-muted">
         List a flat, room or PG for tenants to discover.
       </p>
 
-      <div className="mt-6">
+      <div className="mt-8">
         <PropertyForm
           submitLabel="Create listing"
           submitting={submitting}

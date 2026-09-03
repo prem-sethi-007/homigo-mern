@@ -77,7 +77,7 @@ export default function PropertyForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white border border-slate-200 rounded-xl p-6 space-y-6"
+      className="bg-white border border-line rounded-2xl p-6 space-y-6 shadow-sm"
     >
       <FormField
         label="Title *"
@@ -89,25 +89,25 @@ export default function PropertyForm({
       />
 
       <label className="block">
-        <span className="text-sm font-medium text-slate-700">Description</span>
+        <span className="text-sm font-medium text-ink">Description</span>
         <textarea
           name="description"
           value={form.description}
           onChange={updateField}
           rows={4}
-          className="mt-1 w-full border border-slate-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-500"
+          className="mt-1.5 w-full border border-line rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand/50 transition"
           placeholder="What's the place like?"
         />
       </label>
 
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="block">
-          <span className="text-sm font-medium text-slate-700">Type</span>
+          <span className="text-sm font-medium text-ink">Type</span>
           <select
             name="type"
             value={form.type}
             onChange={updateField}
-            className="mt-1 w-full border border-slate-300 rounded px-3 py-2 bg-white"
+            className="mt-1.5 w-full border border-line rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-brand/50"
           >
             <option value="flat">Flat</option>
             <option value="room">Room</option>
@@ -153,12 +153,12 @@ export default function PropertyForm({
           placeholder="e.g. 2"
         />
         <label className="block">
-          <span className="text-sm font-medium text-slate-700">Furnishing</span>
+          <span className="text-sm font-medium text-ink">Furnishing</span>
           <select
             name="furnishing"
             value={form.furnishing}
             onChange={updateField}
-            className="mt-1 w-full border border-slate-300 rounded px-3 py-2 bg-white"
+            className="mt-1.5 w-full border border-line rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-brand/50"
           >
             <option value="">Not specified</option>
             <option value="furnished">Furnished</option>
@@ -190,14 +190,14 @@ export default function PropertyForm({
           name="available"
           checked={form.available}
           onChange={updateField}
-          className="w-4 h-4"
+          className="w-4 h-4 accent-brand"
         />
-        <span className="text-sm text-slate-700">
+        <span className="text-sm text-ink">
           Available for tenants right now
         </span>
       </label>
 
-      {error && <p className="text-sm text-red-600">{error}</p>}
+      {error && <p className="text-sm text-error-dark">{error}</p>}
 
       <div className="flex justify-end gap-2 pt-2">
         {onCancel && (
@@ -205,7 +205,7 @@ export default function PropertyForm({
             type="button"
             onClick={onCancel}
             disabled={submitting}
-            className="text-sm font-medium bg-slate-100 hover:bg-slate-200 text-slate-800 px-4 py-2 rounded disabled:opacity-50"
+            className="text-sm font-medium bg-sand hover:bg-sand-soft text-ink px-4 py-2 rounded-md disabled:opacity-50 transition"
           >
             Cancel
           </button>
@@ -213,7 +213,7 @@ export default function PropertyForm({
         <button
           type="submit"
           disabled={submitting}
-          className="text-sm font-medium bg-slate-900 text-white hover:bg-slate-800 px-4 py-2 rounded disabled:opacity-50"
+          className="text-sm font-medium bg-brand text-white hover:bg-brand-dark px-5 py-2 rounded-md disabled:opacity-50 transition shadow-sm"
         >
           {submitting ? 'Saving...' : submitLabel}
         </button>

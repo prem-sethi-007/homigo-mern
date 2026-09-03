@@ -37,9 +37,9 @@ export default function Register() {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-10 bg-white shadow rounded-lg p-8">
-      <h1 className="text-2xl font-bold text-slate-900">Create account</h1>
-      <p className="text-sm text-slate-600 mt-1">
+    <div className="max-w-md mx-auto mt-12 mb-16 bg-white shadow-sm rounded-2xl p-8 border border-line">
+      <h1 className="font-display text-3xl text-ink">Create account</h1>
+      <p className="mt-1 text-sm text-muted">
         Join HOMIGO to find your home and your people.
       </p>
 
@@ -73,12 +73,12 @@ export default function Register() {
         />
 
         <label className="block">
-          <span className="text-sm font-medium text-slate-700">I am a</span>
+          <span className="text-sm font-medium text-ink">I am a</span>
           <select
             name="role"
             value={form.role}
             onChange={updateField}
-            className="mt-1 w-full border border-slate-300 rounded px-3 py-2 bg-white"
+            className="mt-1.5 w-full border border-line rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand/50 transition"
           >
             <option value="tenant">Tenant (looking for a place)</option>
             <option value="owner">Owner (listing a property)</option>
@@ -98,20 +98,20 @@ export default function Register() {
           onChange={updateField}
         />
 
-        {error && <p className="text-sm text-red-600">{error}</p>}
+        {error && <p className="text-sm text-error-dark">{error}</p>}
 
         <button
           type="submit"
           disabled={submitting}
-          className="w-full bg-slate-900 text-white rounded py-2 font-medium hover:bg-slate-800 disabled:opacity-50"
+          className="w-full bg-brand text-white hover:bg-brand-dark rounded-md py-2.5 font-medium disabled:opacity-50 transition shadow-sm"
         >
           {submitting ? 'Creating account...' : 'Create account'}
         </button>
       </form>
 
-      <p className="text-sm text-slate-600 mt-4 text-center">
+      <p className="text-sm text-muted mt-6 text-center">
         Already have an account?{' '}
-        <Link to="/login" className="text-slate-900 font-medium hover:underline">
+        <Link to="/login" className="text-brand font-medium hover:underline">
           Log in
         </Link>
       </p>

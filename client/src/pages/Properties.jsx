@@ -4,7 +4,6 @@ import { propertyService } from '../services/propertyService';
 import PropertyCard from '../components/PropertyCard';
 
 const EMPTY_FILTERS = { city: '', type: '', minRent: '', maxRent: '' };
-
 const TYPE_LABEL = { flat: 'Flat', room: 'Room', pg: 'PG' };
 
 function toParams(f) {
@@ -70,18 +69,21 @@ export default function Properties() {
     activeFilters.maxRent !== '';
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-10">
+    <div className="max-w-6xl mx-auto px-6 py-12">
       <div className="flex items-end justify-between flex-wrap gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900">
-            Browse Properties
+          <p className="text-xs uppercase tracking-widest text-brand font-semibold">
+            Properties
+          </p>
+          <h1 className="mt-1 font-display text-3xl sm:text-4xl text-ink">
+            Browse homes across cities
           </h1>
-          <p className="mt-1 text-slate-600">
-            Flats, rooms and PGs across cities.
+          <p className="mt-2 text-muted">
+            Flats, private rooms and PGs — filter by city and budget.
           </p>
         </div>
         {state.status === 'success' && (
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-muted">
             {state.properties.length} listing
             {state.properties.length === 1 ? '' : 's'}
           </p>
@@ -90,26 +92,25 @@ export default function Properties() {
 
       <form
         onSubmit={handleSubmit}
-        className="mt-6 bg-white border border-slate-200 rounded-xl p-4"
+        className="mt-8 bg-white border border-line rounded-2xl p-5 shadow-sm"
       >
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <FilterField
+            label="City"
+            name="city"
+            value={filters.city}
+            onChange={updateField}
+            placeholder="e.g. Bengaluru"
+          />
           <label className="block">
-            <span className="text-xs font-medium text-slate-600">City</span>
-            <input
-              name="city"
-              value={filters.city}
-              onChange={updateField}
-              placeholder="e.g. Bengaluru"
-              className="mt-1 w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
-            />
-          </label>
-          <label className="block">
-            <span className="text-xs font-medium text-slate-600">Type</span>
+            <span className="text-xs font-semibold uppercase tracking-wide text-muted">
+              Type
+            </span>
             <select
               name="type"
               value={filters.type}
               onChange={updateField}
-              className="mt-1 w-full border border-slate-300 rounded px-3 py-2 text-sm bg-white"
+              className="mt-1.5 w-full border border-line rounded-md px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand/50"
             >
               <option value="">Any</option>
               <option value="flat">Flat</option>
@@ -117,42 +118,36 @@ export default function Properties() {
               <option value="pg">PG</option>
             </select>
           </label>
-          <label className="block">
-            <span className="text-xs font-medium text-slate-600">Min rent</span>
-            <input
-              name="minRent"
-              type="number"
-              min="0"
-              value={filters.minRent}
-              onChange={updateField}
-              placeholder="0"
-              className="mt-1 w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
-            />
-          </label>
-          <label className="block">
-            <span className="text-xs font-medium text-slate-600">Max rent</span>
-            <input
-              name="maxRent"
-              type="number"
-              min="0"
-              value={filters.maxRent}
-              onChange={updateField}
-              placeholder="Any"
-              className="mt-1 w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-500"
-            />
-          </label>
+          <FilterField
+            label="Min rent (₹)"
+            name="minRent"
+            type="number"
+            min="0"
+            value={filters.minRent}
+            onChange={updateField}
+            placeholder="0"
+          />
+          <FilterField
+            label="Max rent (₹)"
+            name="maxRent"
+            type="number"
+            min="0"
+            value={filters.maxRent}
+            onChange={updateField}
+            placeholder="Any"
+          />
         </div>
         <div className="mt-4 flex flex-wrap items-center gap-2 justify-end">
           <button
             type="button"
             onClick={handleClear}
-            className="text-sm font-medium bg-slate-100 hover:bg-slate-200 text-slate-800 px-3 py-1.5 rounded"
+            className="text-sm font-medium bg-sand hover:bg-sand-soft text-ink px-3.5 py-2 rounded-md transition"
           >
-            Clear filters
+            Clear
           </button>
           <button
             type="submit"
-            className="text-sm font-medium bg-slate-900 text-white hover:bg-slate-800 px-4 py-1.5 rounded"
+            className="text-sm font-medium bg-brand text-white hover:bg-brand-dark px-5 py-2 rounded-md transition shadow-sm"
           >
             Apply filters
           </button>
@@ -160,11 +155,15 @@ export default function Properties() {
       </form>
 
       {hasActive && (
-        <div className="mt-4 flex flex-wrap items-center gap-2">
-          <span className="text-xs text-slate-500">Active:</span>
+        <div className="mt-5 flex flex-wrap items-center gap-2">
+          <span className="text-xs uppercase tracking-widest text-muted">
+            Active:
+          </span>
           {activeFilters.city && <Chip>City: {activeFilters.city}</Chip>}
           {activeFilters.type && (
-            <Chip>Type: {TYPE_LABEL[activeFilters.type] || activeFilters.type}</Chip>
+            <Chip>
+              Type: {TYPE_LABEL[activeFilters.type] || activeFilters.type}
+            </Chip>
           )}
           {activeFilters.minRent !== '' && (
             <Chip>
@@ -179,18 +178,18 @@ export default function Properties() {
         </div>
       )}
 
-      <div className="mt-6">
+      <div className="mt-8">
         {state.status === 'loading' && <LoadingGrid />}
 
         {state.status === 'error' && (
-          <div className="bg-white border border-red-200 rounded-xl p-6 text-center">
-            <p className="font-semibold text-red-700">
+          <div className="bg-white border border-error-soft rounded-2xl p-6 text-center">
+            <p className="font-semibold text-error-dark">
               Could not load properties
             </p>
-            <p className="mt-1 text-sm text-slate-600">{state.message}</p>
+            <p className="mt-1 text-sm text-muted">{state.message}</p>
             <button
               onClick={() => load(activeFilters)}
-              className="mt-4 bg-slate-900 text-white hover:bg-slate-800 px-4 py-2 rounded font-medium"
+              className="mt-4 bg-brand text-white hover:bg-brand-dark px-4 py-2 rounded-md font-medium transition"
             >
               Try again
             </button>
@@ -198,28 +197,28 @@ export default function Properties() {
         )}
 
         {state.status === 'success' && state.properties.length === 0 && (
-          <div className="bg-white border border-slate-200 rounded-xl p-8 text-center">
-            <p className="font-semibold text-slate-900">
+          <div className="bg-white border border-line rounded-2xl p-10 text-center">
+            <p className="font-semibold text-ink">
               {hasActive
                 ? 'No properties match your filters'
                 : 'No properties yet'}
             </p>
-            <p className="mt-2 text-sm text-slate-600">
+            <p className="mt-2 text-sm text-muted">
               {hasActive
                 ? 'Try broadening your search or clear your filters.'
-                : 'Check back soon - or sign up as an Owner to be the first to list one.'}
+                : 'Check back soon — or sign up as an Owner to be the first to list one.'}
             </p>
             {hasActive ? (
               <button
                 onClick={handleClear}
-                className="inline-block mt-4 bg-slate-900 text-white hover:bg-slate-800 px-4 py-2 rounded font-medium"
+                className="inline-block mt-5 bg-brand text-white hover:bg-brand-dark px-4 py-2 rounded-md font-medium transition"
               >
                 Clear filters
               </button>
             ) : (
               <Link
                 to="/"
-                className="inline-block mt-4 bg-slate-900 text-white hover:bg-slate-800 px-4 py-2 rounded font-medium"
+                className="inline-block mt-5 bg-brand text-white hover:bg-brand-dark px-4 py-2 rounded-md font-medium transition"
               >
                 Back to home
               </Link>
@@ -228,7 +227,7 @@ export default function Properties() {
         )}
 
         {state.status === 'success' && state.properties.length > 0 && (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {state.properties.map((p) => (
               <PropertyCard key={p._id} property={p} />
             ))}
@@ -239,9 +238,23 @@ export default function Properties() {
   );
 }
 
+function FilterField({ label, ...inputProps }) {
+  return (
+    <label className="block">
+      <span className="text-xs font-semibold uppercase tracking-wide text-muted">
+        {label}
+      </span>
+      <input
+        {...inputProps}
+        className="mt-1.5 w-full border border-line rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand/50"
+      />
+    </label>
+  );
+}
+
 function Chip({ children }) {
   return (
-    <span className="text-xs font-medium bg-slate-100 text-slate-700 px-2.5 py-1 rounded-full">
+    <span className="text-xs font-medium bg-brand-soft text-brand-dark px-3 py-1 rounded-full">
       {children}
     </span>
   );
@@ -249,17 +262,17 @@ function Chip({ children }) {
 
 function LoadingGrid() {
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {[0, 1, 2, 3, 4, 5].map((i) => (
         <div
           key={i}
-          className="bg-white border border-slate-200 rounded-xl overflow-hidden"
+          className="bg-white border border-line rounded-2xl overflow-hidden"
         >
-          <div className="aspect-[4/3] bg-slate-100 animate-pulse" />
-          <div className="p-4 space-y-3">
-            <div className="h-4 bg-slate-100 rounded animate-pulse w-3/4" />
-            <div className="h-3 bg-slate-100 rounded animate-pulse w-1/2" />
-            <div className="h-5 bg-slate-100 rounded animate-pulse w-1/3" />
+          <div className="aspect-[4/3] bg-sand-soft animate-pulse" />
+          <div className="p-5 space-y-3">
+            <div className="h-4 bg-sand-soft rounded animate-pulse w-3/4" />
+            <div className="h-3 bg-sand-soft rounded animate-pulse w-1/2" />
+            <div className="h-5 bg-sand-soft rounded animate-pulse w-1/3" />
           </div>
         </div>
       ))}

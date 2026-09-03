@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import DashboardCard from '../components/DashboardCard';
 
 const IcPlus = (
@@ -21,7 +22,30 @@ const IcChart = (
 export default function OwnerDashboard() {
   return (
     <div>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="bg-brand text-white rounded-2xl p-6 sm:p-8 shadow-sm">
+        <div className="flex items-start justify-between gap-4 flex-wrap">
+          <div className="max-w-xl">
+            <p className="text-xs uppercase tracking-widest text-brand-soft">
+              Get started
+            </p>
+            <h2 className="mt-2 font-display text-2xl sm:text-3xl">
+              List a property in minutes
+            </h2>
+            <p className="mt-2 text-sm text-brand-soft/90">
+              Add photos, rent and amenities. Tenants across cities can find
+              your listing right away.
+            </p>
+          </div>
+          <Link
+            to="/properties/new"
+            className="bg-white text-brand hover:bg-brand-soft px-5 py-2.5 rounded-md text-sm font-semibold transition shadow-sm whitespace-nowrap"
+          >
+            + Add a property
+          </Link>
+        </div>
+      </div>
+
+      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <DashboardCard
           icon={IcPlus}
           title="Add a Property"

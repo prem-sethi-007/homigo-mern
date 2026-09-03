@@ -20,6 +20,16 @@ const ShieldIcon = (
   </svg>
 );
 
+const CITIES = [
+  'Bengaluru',
+  'Mumbai',
+  'Delhi',
+  'Pune',
+  'Hyderabad',
+  'Chandigarh',
+  'Jaipur',
+];
+
 const STEPS = [
   {
     step: 1,
@@ -43,68 +53,97 @@ export default function Home() {
 
   return (
     <>
-      <section className="bg-gradient-to-b from-white to-slate-50">
-        <div className="max-w-4xl mx-auto px-6 py-20 text-center">
-          <p className="text-xs font-semibold uppercase tracking-widest text-indigo-600">
+      {/* Hero */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-x-0 top-0 h-[520px] bg-gradient-to-b from-sand-soft/50 to-ivory pointer-events-none" />
+
+        <div className="relative max-w-4xl mx-auto px-6 pt-20 pb-16 text-center">
+          <div className="inline-flex items-center gap-2 rounded-full bg-white border border-line px-3 py-1 text-xs text-muted">
+            <span className="w-1.5 h-1.5 rounded-full bg-brand" />
             City-based accommodation
-          </p>
-          <h1 className="mt-3 text-5xl sm:text-6xl font-bold text-slate-900 tracking-tight">
-            HOMIGO
+          </div>
+
+          <h1 className="mt-6 font-display text-5xl sm:text-6xl leading-[1.05] text-ink">
+            Find Your Home.
+            <br />
+            <span className="text-brand">Find Your People.</span>
           </h1>
-          <p className="mt-4 text-xl sm:text-2xl text-slate-700 font-medium">
-            Find Your Home. Find Your People.
-          </p>
-          <p className="mt-6 text-slate-600 max-w-2xl mx-auto">
-            Discover flats, rooms and PGs across your city - and match with
-            compatible roommates who fit your lifestyle. Made for students and
-            working professionals.
+
+          <p className="mt-6 text-lg text-muted max-w-2xl mx-auto leading-relaxed">
+            HOMIGO helps students and working professionals discover flats,
+            rooms and PGs — and match with compatible roommates who fit their
+            lifestyle.
           </p>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
             <Link
               to="/properties"
-              className="bg-slate-900 text-white hover:bg-slate-800 px-6 py-3 rounded-lg font-medium"
+              className="bg-brand text-white hover:bg-brand-dark px-6 py-3 rounded-md font-medium transition shadow-sm"
             >
               Browse Properties
             </Link>
             <Link
               to="/roommates"
-              className="bg-white border border-slate-300 text-slate-800 hover:bg-slate-100 px-6 py-3 rounded-lg font-medium"
+              className="bg-white border border-line text-ink hover:bg-sand-soft px-6 py-3 rounded-md font-medium transition"
             >
               Find Roommates
             </Link>
           </div>
 
           {!user && (
-            <p className="mt-6 text-sm text-slate-500">
+            <p className="mt-6 text-sm text-muted">
               New here?{' '}
               <Link
                 to="/register"
-                className="text-slate-900 font-medium hover:underline"
+                className="text-brand font-medium hover:underline"
               >
                 Create a free account
               </Link>
             </p>
           )}
+
+          {/* Cities strip */}
+          <div className="mt-14">
+            <p className="text-xs uppercase tracking-widest text-muted-soft">
+              Now serving
+            </p>
+            <div className="mt-3 flex flex-wrap justify-center gap-2">
+              {CITIES.map((c) => (
+                <span
+                  key={c}
+                  className="text-sm bg-white border border-line text-ink px-3 py-1 rounded-full"
+                >
+                  {c}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="bg-white border-t border-slate-100">
-        <div className="max-w-6xl mx-auto px-6 py-16">
-          <h2 className="text-center text-2xl sm:text-3xl font-bold text-slate-900">
-            Everything you need to move in
-          </h2>
-          <p className="mt-2 text-center text-slate-600">
-            One place for both sides of the move.
-          </p>
+      {/* Features */}
+      <section className="bg-ivory">
+        <div className="max-w-6xl mx-auto px-6 py-20">
+          <div className="text-center max-w-2xl mx-auto">
+            <p className="text-xs uppercase tracking-widest text-brand font-semibold">
+              What HOMIGO offers
+            </p>
+            <h2 className="mt-3 font-display text-3xl sm:text-4xl text-ink">
+              Everything you need to move in
+            </h2>
+            <p className="mt-3 text-muted">
+              One place for both sides of the move — the flat, and the people
+              in it.
+            </p>
+          </div>
 
-          <div className="mt-10 grid gap-5 sm:grid-cols-3">
+          <div className="mt-12 grid gap-5 sm:grid-cols-3">
             <FeatureCard icon={HomeIcon} title="Discover Properties">
               Search flats, private rooms and PGs across your city, filtered by
               rent, type and amenities.
             </FeatureCard>
             <FeatureCard icon={UsersIcon} title="Compatible Roommates">
-              Match with people who share your budget, schedule and lifestyle -
+              Match with people who share your budget, schedule and lifestyle —
               not just the room.
             </FeatureCard>
             <FeatureCard icon={ShieldIcon} title="Owner-Verified Listings">
@@ -115,32 +154,41 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-slate-50">
-        <div className="max-w-4xl mx-auto px-6 py-16">
-          <h2 className="text-center text-2xl sm:text-3xl font-bold text-slate-900">
-            How it works
-          </h2>
+      {/* How it works */}
+      <section className="bg-sand-soft/40 border-y border-line">
+        <div className="max-w-4xl mx-auto px-6 py-20">
+          <div className="text-center">
+            <p className="text-xs uppercase tracking-widest text-brand font-semibold">
+              How it works
+            </p>
+            <h2 className="mt-3 font-display text-3xl sm:text-4xl text-ink">
+              Move in in three steps
+            </h2>
+          </div>
 
-          <div className="mt-10 grid gap-6 sm:grid-cols-3">
+          <div className="mt-12 grid gap-8 sm:grid-cols-3">
             {STEPS.map((s) => (
               <div key={s.step} className="text-center">
-                <div className="w-10 h-10 mx-auto rounded-full bg-slate-900 text-white flex items-center justify-center font-semibold">
+                <div className="w-11 h-11 mx-auto rounded-full bg-brand text-white flex items-center justify-center font-semibold shadow-sm">
                   {s.step}
                 </div>
-                <h3 className="mt-4 font-semibold text-slate-900">{s.title}</h3>
-                <p className="mt-2 text-sm text-slate-600">{s.desc}</p>
+                <h3 className="mt-4 font-semibold text-ink">{s.title}</h3>
+                <p className="mt-2 text-sm text-muted leading-relaxed">
+                  {s.desc}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-white border-t border-slate-100">
-        <div className="max-w-3xl mx-auto px-6 py-16 text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
+      {/* Final CTA */}
+      <section className="bg-ivory">
+        <div className="max-w-3xl mx-auto px-6 py-20 text-center">
+          <h2 className="font-display text-3xl sm:text-4xl text-ink">
             {user ? `Welcome back, ${user.name}` : 'Ready to find your home?'}
           </h2>
-          <p className="mt-3 text-slate-600">
+          <p className="mt-4 text-muted max-w-xl mx-auto">
             {user
               ? 'Jump into your dashboard to pick up where you left off.'
               : 'Join HOMIGO to start browsing properties and roommates in your city.'}
@@ -149,16 +197,16 @@ export default function Home() {
             {user ? (
               <Link
                 to="/dashboard"
-                className="bg-slate-900 text-white hover:bg-slate-800 px-6 py-3 rounded-lg font-medium"
+                className="bg-brand text-white hover:bg-brand-dark px-6 py-3 rounded-md font-medium transition shadow-sm"
               >
                 Go to Dashboard
               </Link>
             ) : (
               <Link
                 to="/register"
-                className="bg-slate-900 text-white hover:bg-slate-800 px-6 py-3 rounded-lg font-medium"
+                className="bg-brand text-white hover:bg-brand-dark px-6 py-3 rounded-md font-medium transition shadow-sm"
               >
-                Get started - it's free
+                Get started — it's free
               </Link>
             )}
           </div>

@@ -1,12 +1,12 @@
 export default function RoleBadge({ role }) {
   const styles = {
-    tenant: 'bg-emerald-100 text-emerald-700',
-    owner: 'bg-amber-100 text-amber-700',
+    tenant: 'bg-sage-soft text-sage-dark',
+    owner: 'bg-brand-soft text-brand-dark',
   };
   const label = role === 'owner' ? 'Owner' : 'Tenant';
   return (
     <span
-      className={`inline-flex items-center text-xs font-semibold px-2.5 py-1 rounded-full ${styles[role] || styles.tenant}`}
+      className={`inline-flex items-center text-xs font-semibold px-3 py-1 rounded-full ${styles[role] || styles.tenant}`}
     >
       {label}
     </span>
