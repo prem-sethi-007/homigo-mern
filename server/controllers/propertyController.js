@@ -40,7 +40,40 @@ async function createProperty(req, res) {
 
 async function getProperties(req, res) {
   try {
-    const properties = await Property.find()
+    const { city, minRent, maxRent, type } = req.query;
+    const query = {};
+
+    if (typeof city === 'string' && city.trim()) {
+      const safe = city.trim().replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      query.city = { $regex: safe, $options: 'i' };
+    }
+
+    if (typeof type === 'string' && ['flat', 'room', 'pg'].includes(type)) {
+      query.type = type;
+    }
+
+    const rent = {};
+    if (minRent !== undefined && minRent !== '') {
+      const n = Number(minRent);
+      if (!Number.isFinite(n) || n < 0) {
+        return res
+          .status(400)
+          .json({ message: 'minRent must be a non-negative number' });
+      }
+      rent.$gte = n;
+    }
+    if (maxRent !== undefined && maxRent !== '') {
+      const n = Number(maxRent);
+      if (!Number.isFinite(n) || n < 0) {
+        return res
+          .status(400)
+          .json({ message: 'maxRent must be a non-negative number' });
+      }
+      rent.$lte = n;
+    }
+    if (Object.keys(rent).length) query.rent = rent;
+
+    const properties = await Property.find(query)
       .populate('owner', 'name email city')
       .sort({ createdAt: -1 });
     res.json({ properties });
