@@ -26,13 +26,13 @@ export default function OwnerDashboard() {
           icon={IcPlus}
           title="Add a Property"
           description="List a flat, room or PG for tenants to discover."
-          comingSoon
+          to="/properties/new"
         />
         <DashboardCard
           icon={IcList}
           title="My Listings"
           description="Manage the properties you've posted so far."
-          comingSoon
+          to="/properties/mine"
         />
         <DashboardCard
           icon={IcChart}
@@ -40,15 +40,6 @@ export default function OwnerDashboard() {
           description="See how many people are viewing and saving your properties."
           comingSoon
         />
-      </div>
-
-      <div className="mt-8 bg-white border border-slate-200 rounded-xl p-8 text-center">
-        <p className="font-semibold text-slate-900">
-          You haven't listed any properties yet.
-        </p>
-        <p className="mt-1 text-sm text-slate-600">
-          Once property management is enabled, your listings will appear here.
-        </p>
       </div>
     </div>
   );
