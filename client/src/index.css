@@ -9,6 +9,8 @@
     -moz-osx-font-smoothing: grayscale;
   }
   body {
-    @apply bg-ivory text-ink font-sans;
+    background-color: theme('colors.ivory');
+    color: theme('colors.ink');
+    font-family: theme('fontFamily.sans');
   }
 }
