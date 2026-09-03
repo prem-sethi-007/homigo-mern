@@ -50,7 +50,7 @@ export default function TenantDashboard() {
           icon={IcProfile}
           title="My Roommate Profile"
           description="Tell others your preferences so they can match with you."
-          comingSoon
+          to="/roommate-profile"
         />
       </div>
 

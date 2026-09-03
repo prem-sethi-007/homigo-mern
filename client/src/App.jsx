@@ -15,6 +15,7 @@ import EditProperty from './pages/EditProperty';
 import MyListings from './pages/MyListings';
 import Favorites from './pages/Favorites';
 import Roommates from './pages/Roommates';
+import RoommateProfile from './pages/RoommateProfile';
 
 export default function App() {
   return (
@@ -61,6 +62,14 @@ export default function App() {
                 element={
                   <ProtectedRoute>
                     <Favorites />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/roommate-profile"
+                element={
+                  <ProtectedRoute>
+                    <RoommateProfile />
                   </ProtectedRoute>
                 }
               />
