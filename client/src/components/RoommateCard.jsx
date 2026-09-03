@@ -42,7 +42,14 @@ function Pill({ children }) {
   );
 }
 
-export default function RoommateCard({ profile }) {
+function scoreColor(score) {
+  if (score >= 80) return 'bg-emerald-100 text-emerald-700';
+  if (score >= 60) return 'bg-indigo-100 text-indigo-700';
+  if (score >= 40) return 'bg-slate-100 text-slate-700';
+  return 'bg-slate-100 text-slate-500';
+}
+
+export default function RoommateCard({ profile, match }) {
   const {
     _id,
     age,
@@ -77,10 +84,21 @@ export default function RoommateCard({ profile }) {
             {[city, occupation].filter(Boolean).join(' · ') || '—'}
           </p>
         </div>
-        {typeof age === 'number' && (
-          <span className="text-xs font-medium text-slate-500">
-            Age {age}
+        {match ? (
+          <span
+            className={`text-xs font-semibold px-2 py-1 rounded-full whitespace-nowrap ${scoreColor(
+              match.score
+            )}`}
+            title="Compatibility score"
+          >
+            {match.score}% match
           </span>
+        ) : (
+          typeof age === 'number' && (
+            <span className="text-xs font-medium text-slate-500">
+              Age {age}
+            </span>
+          )
         )}
       </div>
 
@@ -99,6 +117,21 @@ export default function RoommateCard({ profile }) {
           Prefers: {areasPreview}
           {extraAreas > 0 && ` +${extraAreas} more`}
         </p>
+      )}
+
+      {match && (match.reasons?.length > 0 || match.notes?.length > 0) && (
+        <div className="mt-4 pt-3 border-t border-slate-100">
+          {match.reasons?.slice(0, 3).map((r) => (
+            <p key={r} className="text-xs text-emerald-700">
+              + {r}
+            </p>
+          ))}
+          {match.notes?.slice(0, 2).map((n) => (
+            <p key={n} className="text-xs text-slate-500">
+              · {n}
+            </p>
+          ))}
+        </div>
       )}
     </Link>
   );

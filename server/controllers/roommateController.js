@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const RoommateProfile = require('../models/RoommateProfile');
+const { computeCompatibility } = require('../utils/compatibility');
 
 const UPDATABLE_FIELDS = [
   'age',
@@ -117,10 +118,36 @@ async function getProfileById(req, res) {
   }
 }
 
+async function getRecommendations(req, res) {
+  try {
+    const myProfile = await RoommateProfile.findOne({ user: req.user._id });
+    if (!myProfile) {
+      return res.json({ profiles: [], needsProfile: true });
+    }
+
+    const others = await RoommateProfile.find({
+      user: { $ne: req.user._id },
+    }).populate('user', 'name email city');
+
+    const ranked = others
+      .map((p) => {
+        const match = computeCompatibility(myProfile, p);
+        return { profile: p, match };
+      })
+      .sort((a, b) => b.match.score - a.match.score);
+
+    res.json({ profiles: ranked, needsProfile: false });
+  } catch (err) {
+    console.error('getRecommendations error:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+}
+
 module.exports = {
   getMyProfile,
   createMyProfile,
   updateMyProfile,
   listProfiles,
   getProfileById,
+  getRecommendations,
 };
