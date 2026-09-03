@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const RoommateProfile = require('../models/RoommateProfile');
 
 const UPDATABLE_FIELDS = [
@@ -83,4 +84,43 @@ async function updateMyProfile(req, res) {
   }
 }
 
-module.exports = { getMyProfile, createMyProfile, updateMyProfile };
+async function listProfiles(req, res) {
+  try {
+    const profiles = await RoommateProfile.find({
+      user: { $ne: req.user._id },
+    })
+      .populate('user', 'name email city')
+      .sort({ updatedAt: -1 });
+    res.json({ profiles });
+  } catch (err) {
+    console.error('listProfiles error:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+}
+
+async function getProfileById(req, res) {
+  try {
+    if (!mongoose.isValidObjectId(req.params.id)) {
+      return res.status(404).json({ message: 'Roommate profile not found' });
+    }
+    const profile = await RoommateProfile.findById(req.params.id).populate(
+      'user',
+      'name email city'
+    );
+    if (!profile) {
+      return res.status(404).json({ message: 'Roommate profile not found' });
+    }
+    res.json({ profile });
+  } catch (err) {
+    console.error('getProfileById error:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+}
+
+module.exports = {
+  getMyProfile,
+  createMyProfile,
+  updateMyProfile,
+  listProfiles,
+  getProfileById,
+};
