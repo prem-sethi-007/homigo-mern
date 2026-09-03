@@ -6,6 +6,7 @@ const connectDB = require('./config/db');
 const authRoutes = require('./routes/authRoutes');
 const propertyRoutes = require('./routes/propertyRoutes');
 const favoriteRoutes = require('./routes/favoriteRoutes');
+const roommateRoutes = require('./routes/roommateRoutes');
 
 dotenv.config();
 
@@ -33,6 +34,7 @@ app.get('/api/health', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/properties', propertyRoutes);
 app.use('/api/favorites', favoriteRoutes);
+app.use('/api/roommates', roommateRoutes);
 
 const PORT = process.env.PORT || 5000;
 
