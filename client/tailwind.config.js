@@ -5,31 +5,31 @@ export default {
     extend: {
       colors: {
         brand: {
-          DEFAULT: '#C45A3C',
-          dark: '#A94B31',
-          soft: '#F1D8CC',
+          DEFAULT: '#622B14', // Dark Brown - primary
+          dark: '#995F2F',    // Warm Brown - hover / secondary
+          soft: '#EFDCC7',    // Light warm-beige - icon backdrops
         },
         sand: {
-          DEFAULT: '#E8D8C3',
-          soft: '#F0E5D6',
+          DEFAULT: '#E4D6A9', // Cream
+          soft: '#EFE6CE',    // Lighter cream
         },
-        ivory: '#FAF7F2',
-        ink: '#242424',
+        ivory: '#F8F5EE',     // Warm page background
+        ink: '#2B211B',       // Dark text
         muted: {
-          DEFAULT: '#6B615A',
-          soft: '#948880',
+          DEFAULT: '#7A6E5F', // Warm secondary text
+          soft: '#A69B87',    // Warm tertiary text
         },
         sage: {
-          DEFAULT: '#6F8F72',
-          dark: '#4F6C53',
-          soft: '#DFE9E0',
+          DEFAULT: '#978F66', // Olive - supporting UI, success accents
+          dark: '#6D6749',    // Deeper olive for text on soft bg
+          soft: '#E8E3CC',    // Very light olive for pills / success flash
         },
         error: {
-          DEFAULT: '#B4544B',
-          dark: '#8E3F38',
-          soft: '#F3DAD6',
+          DEFAULT: '#B0413A',
+          dark: '#8A2F2A',
+          soft: '#F3D9D6',
         },
-        line: '#EAE1D2',
+        line: '#E5DDC8',      // Warm border
       },
       fontFamily: {
         sans: [
