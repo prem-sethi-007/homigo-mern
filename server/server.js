@@ -19,7 +19,32 @@ connectDB();
 
 const app = express();
 
-app.use(cors());
+// CORS: always allow local dev origins, plus any origins listed in
+// FRONTEND_URL (comma-separated).
+// Requests with no Origin header (curl, health checks, server-to-server)
+// are always allowed.
+const DEV_ORIGINS = ['http://localhost:5173', 'http://127.0.0.1:5173'];
+const allowedOrigins = [
+  ...DEV_ORIGINS,
+  ...(process.env.FRONTEND_URL || '')
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean),
+];
+
+app.use(
+  cors({
+    origin(origin, cb) {
+      if (!origin) return cb(null, true);
+      if (allowedOrigins.includes(origin)) return cb(null, true);
+      // Not allowed: return without setting the CORS header.
+      // The response still completes normally; the browser blocks it
+      // due to the missing Access-Control-Allow-Origin header.
+      cb(null, false);
+    },
+  })
+);
+
 app.use(express.json());
 
 app.get('/api/health', (req, res) => {
@@ -37,7 +62,8 @@ app.use('/api/favorites', favoriteRoutes);
 app.use('/api/roommates', roommateRoutes);
 
 const PORT = process.env.PORT || 5000;
+const HOST = '0.0.0.0';
 
-app.listen(PORT, () => {
-  console.log(`Homigo server listening on http://localhost:${PORT}`);
+app.listen(PORT, HOST, () => {
+  console.log(`Homigo server listening on port ${PORT}`);
 });
