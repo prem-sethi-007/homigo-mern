@@ -4,7 +4,7 @@ export default function FormField({ label, ...inputProps }) {
       <span className="text-sm font-medium text-ink">{label}</span>
       <input
         {...inputProps}
-        className="mt-1.5 w-full border border-line rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand/50 transition"
+        className="mt-1.5 w-full border border-line rounded-full px-4 py-2.5 focus:outline-none focus:border-brand/50 focus:ring-1 focus:ring-brand/40 transition"
       />
     </label>
   );

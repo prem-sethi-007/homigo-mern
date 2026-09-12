@@ -55,6 +55,9 @@ function toPayload(f) {
   };
 }
 
+const selectCls =
+  'mt-1.5 w-full border border-line rounded-full px-4 py-2.5 bg-white focus:outline-none focus:border-brand/50 focus:ring-1 focus:ring-brand/40 transition';
+
 export default function RoommateProfile() {
   const [state, setState] = useState({ status: 'loading' });
   const [form, setForm] = useState(EMPTY);
@@ -117,18 +120,20 @@ export default function RoommateProfile() {
 
   if (state.status === 'loading') {
     return (
-      <div className="max-w-3xl mx-auto px-6 py-12 text-sm text-muted">
-        Loading your roommate profile...
+      <div className="max-w-3xl mx-auto px-6 pt-16 text-sm text-muted">
+        Loading your roommate profile…
       </div>
     );
   }
 
   if (state.status === 'error') {
     return (
-      <div className="max-w-3xl mx-auto px-6 py-12">
-        <div className="bg-white border border-error-soft rounded-2xl p-6 text-center">
-          <p className="font-semibold text-error-dark">Could not load profile</p>
-          <p className="mt-1 text-sm text-muted">{state.message}</p>
+      <div className="max-w-3xl mx-auto px-6 pt-16">
+        <div className="bg-white border border-error-soft rounded-2xl p-8 text-center">
+          <p className="font-display text-lg text-error-dark">
+            Could not load profile
+          </p>
+          <p className="mt-2 text-sm text-muted">{state.message}</p>
         </div>
       </div>
     );
@@ -137,22 +142,22 @@ export default function RoommateProfile() {
   const isEdit = state.status === 'hasProfile';
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-12">
+    <div className="max-w-3xl mx-auto px-6 pt-16 pb-24">
       <Link
         to="/dashboard"
-        className="text-sm text-muted hover:text-ink transition"
+        className="text-xs uppercase tracking-[0.2em] text-muted hover:text-ink transition"
       >
         ← Back to dashboard
       </Link>
 
-      <div className="mt-4">
-        <p className="text-xs uppercase tracking-widest text-brand font-semibold">
+      <div className="mt-6">
+        <p className="text-xs uppercase tracking-[0.24em] text-brand font-semibold">
           Roommate profile
         </p>
-        <h1 className="mt-1 font-display text-3xl text-ink">
-          {isEdit ? 'Your preferences' : 'Set your preferences'}
+        <h1 className="mt-3 font-display text-4xl text-ink">
+          {isEdit ? 'Your preferences.' : 'Set your preferences.'}
         </h1>
-        <p className="mt-2 text-sm text-muted">
+        <p className="mt-3 text-sm text-muted">
           {isEdit
             ? "Update what you're looking for — matches update immediately."
             : 'Tell others your preferences so they can match with you.'}
@@ -160,14 +165,14 @@ export default function RoommateProfile() {
       </div>
 
       {flash && (
-        <div className="mt-5 rounded-xl px-4 py-3 text-sm bg-sage-soft/70 border border-sage-soft text-sage-dark">
+        <div className="mt-6 rounded-2xl px-5 py-3 text-sm bg-sage-soft/70 border border-sage-soft text-sage-dark">
           {flash}
         </div>
       )}
 
       <form
         onSubmit={handleSubmit}
-        className="mt-6 bg-white border border-line rounded-2xl p-6 space-y-6 shadow-sm"
+        className="mt-8 bg-white border border-line rounded-2xl p-8 space-y-6 shadow-sm"
       >
         <div className="grid gap-4 sm:grid-cols-3">
           <FormField
@@ -186,7 +191,7 @@ export default function RoommateProfile() {
               name="gender"
               value={form.gender}
               onChange={updateField}
-              className="mt-1.5 w-full border border-line rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-brand/50"
+              className={selectCls}
             >
               <option value="">Prefer not to say</option>
               <option value="male">Male</option>
@@ -246,7 +251,7 @@ export default function RoommateProfile() {
               name="lifestyle"
               value={form.lifestyle}
               onChange={updateField}
-              className="mt-1.5 w-full border border-line rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-brand/50"
+              className={selectCls}
             >
               <option value="">Not specified</option>
               <option value="quiet">Quiet</option>
@@ -260,7 +265,7 @@ export default function RoommateProfile() {
               name="smoking"
               value={form.smoking}
               onChange={updateField}
-              className="mt-1.5 w-full border border-line rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-brand/50"
+              className={selectCls}
             >
               <option value="">Not specified</option>
               <option value="no">No</option>
@@ -274,7 +279,7 @@ export default function RoommateProfile() {
               name="pets"
               value={form.pets}
               onChange={updateField}
-              className="mt-1.5 w-full border border-line rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-brand/50"
+              className={selectCls}
             >
               <option value="">Not specified</option>
               <option value="no">No</option>
@@ -291,8 +296,8 @@ export default function RoommateProfile() {
             rows={4}
             value={form.bio}
             onChange={updateField}
-            className="mt-1.5 w-full border border-line rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand/50 transition"
-            placeholder="A short intro so people know what you're like..."
+            className="mt-1.5 w-full border border-line rounded-2xl px-4 py-3 focus:outline-none focus:border-brand/50 focus:ring-1 focus:ring-brand/40 transition"
+            placeholder="A short intro so people know what you're like…"
           />
         </label>
 
@@ -302,10 +307,10 @@ export default function RoommateProfile() {
           <button
             type="submit"
             disabled={submitting}
-            className="text-sm font-medium bg-brand text-white hover:bg-brand-dark px-5 py-2 rounded-md disabled:opacity-50 transition shadow-sm"
+            className="text-sm font-medium bg-brand text-white hover:bg-brand-dark px-6 py-2.5 rounded-full disabled:opacity-50 transition shadow-sm"
           >
             {submitting
-              ? 'Saving...'
+              ? 'Saving…'
               : isEdit
               ? 'Save changes'
               : 'Create profile'}

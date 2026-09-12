@@ -7,16 +7,16 @@ export default function Dashboard() {
   const { user } = useAuth();
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-12">
-      <div className="flex items-start justify-between flex-wrap gap-4">
+    <div className="max-w-7xl mx-auto px-6 pt-16 pb-24">
+      <div className="flex items-start justify-between flex-wrap gap-6 border-b border-line pb-8">
         <div>
-          <p className="text-xs uppercase tracking-widest text-brand font-semibold">
+          <p className="text-xs uppercase tracking-[0.24em] text-brand font-semibold">
             Dashboard
           </p>
-          <h1 className="mt-1 font-display text-3xl sm:text-4xl text-ink">
-            Welcome back, {user.name}
+          <h1 className="mt-3 font-display text-4xl sm:text-5xl leading-[1.02] tracking-tight text-ink">
+            Welcome back, {user.name.split(' ')[0]}.
           </h1>
-          <p className="mt-2 text-muted">
+          <p className="mt-3 text-muted">
             Your {user.role === 'owner' ? 'Owner' : 'Tenant'} home base.
           </p>
         </div>

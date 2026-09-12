@@ -12,11 +12,7 @@ const SMOKING_LABEL = {
   occasionally: 'Occasional smoker',
   yes: 'Smoker',
 };
-const PETS_LABEL = {
-  no: 'No pets',
-  okay: 'Okay with pets',
-  yes: 'Has pets',
-};
+const PETS_LABEL = { no: 'No pets', okay: 'Okay with pets', yes: 'Has pets' };
 const GENDER_LABEL = { male: 'Male', female: 'Female', other: 'Other' };
 
 function initials(name) {
@@ -35,26 +31,6 @@ function formatBudget(min, max) {
   return `up to ${fmt(max)}`;
 }
 
-function Pill({ children }) {
-  return (
-    <span className="bg-sand-soft text-ink px-3 py-1 rounded-full text-sm font-medium">
-      {children}
-    </span>
-  );
-}
-
-function DetailRow({ label, value }) {
-  if (!value) return null;
-  return (
-    <div>
-      <p className="text-xs font-semibold text-muted uppercase tracking-widest">
-        {label}
-      </p>
-      <p className="mt-1 text-ink">{value}</p>
-    </div>
-  );
-}
-
 export default function RoommateDetails() {
   const { id } = useParams();
   const [state, setState] = useState({ status: 'loading' });
@@ -65,8 +41,7 @@ export default function RoommateDetails() {
     roommateService
       .getById(id)
       .then((data) => {
-        if (active)
-          setState({ status: 'success', profile: data.profile });
+        if (active) setState({ status: 'success', profile: data.profile });
       })
       .catch((err) => {
         if (!active) return;
@@ -83,32 +58,32 @@ export default function RoommateDetails() {
   }, [id]);
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-8">
+    <div className="max-w-5xl mx-auto px-6 pt-8 pb-24">
       <Link
         to="/roommates"
-        className="text-sm text-muted hover:text-ink transition"
+        className="text-xs uppercase tracking-[0.2em] text-muted hover:text-ink transition"
       >
         ← Back to roommates
       </Link>
 
-      <div className="mt-4">
+      <div className="mt-6">
         {state.status === 'loading' && (
-          <div className="text-sm text-muted">Loading profile...</div>
+          <div className="text-sm text-muted">Loading profile…</div>
         )}
 
         {state.status === 'error' && (
-          <div className="bg-white border border-line rounded-2xl p-10 text-center">
-            <p className="font-semibold text-ink">
+          <div className="border border-line rounded-2xl p-14 text-center">
+            <p className="font-display text-2xl text-ink">
               {state.notFound
-                ? 'Roommate profile not found'
-                : 'Could not load profile'}
+                ? 'Roommate profile not found.'
+                : 'Could not load profile.'}
             </p>
             {!state.notFound && (
-              <p className="mt-2 text-sm text-muted">{state.message}</p>
+              <p className="mt-3 text-sm text-muted">{state.message}</p>
             )}
             <Link
               to="/roommates"
-              className="inline-block mt-5 bg-brand text-white hover:bg-brand-dark px-4 py-2 rounded-md font-medium transition"
+              className="inline-block mt-6 bg-brand text-white hover:bg-brand-dark px-5 py-2.5 rounded-full text-sm font-medium transition"
             >
               Back to browse
             </Link>
@@ -141,110 +116,140 @@ function Detail({ profile }) {
   const budget = formatBudget(budgetMin, budgetMax);
 
   return (
-    <div className="grid gap-8 lg:grid-cols-3">
-      <div className="lg:col-span-2">
-        <div className="flex items-start gap-4">
-          <div className="w-16 h-16 rounded-full bg-brand-soft text-brand flex items-center justify-center text-xl font-semibold flex-shrink-0">
+    <>
+      {/* Header */}
+      <div className="border-b border-line pb-10">
+        <div className="flex items-start gap-6">
+          <div className="w-20 h-20 rounded-full bg-brand-soft text-brand flex items-center justify-center font-display text-2xl flex-shrink-0">
             {initials(name)}
           </div>
-          <div className="flex-1">
-            <h1 className="font-display text-3xl sm:text-4xl text-ink leading-tight">
+          <div>
+            <p className="text-xs uppercase tracking-[0.24em] text-brand font-semibold">
+              {city || 'City'}
+            </p>
+            <h1 className="mt-3 font-display text-5xl sm:text-6xl leading-[1.02] tracking-tight text-ink">
               {name}
             </h1>
-            <p className="mt-1 text-muted">
-              {[city, occupation].filter(Boolean).join(' · ') || '—'}
-            </p>
+            {occupation && (
+              <p className="mt-4 text-lg text-muted italic font-display">
+                {occupation}
+              </p>
+            )}
           </div>
         </div>
-
-        <div className="mt-6 flex flex-wrap gap-2">
-          {lifestyle && <Pill>{LIFESTYLE_LABEL[lifestyle] || lifestyle}</Pill>}
-          {smoking && <Pill>{SMOKING_LABEL[smoking] || smoking}</Pill>}
-          {pets && <Pill>{PETS_LABEL[pets] || pets}</Pill>}
-        </div>
-
-        <div className="mt-10 grid gap-6 sm:grid-cols-2">
-          <DetailRow
-            label="Age"
-            value={typeof age === 'number' ? String(age) : null}
-          />
-          <DetailRow label="Gender" value={GENDER_LABEL[gender] || null} />
-          <DetailRow label="Occupation" value={occupation} />
-          <DetailRow label="City" value={city} />
-        </div>
-
-        {preferredAreas.length > 0 && (
-          <div className="mt-10">
-            <p className="text-xs font-semibold text-brand uppercase tracking-widest">
-              Preferred areas
-            </p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {preferredAreas.map((a) => (
-                <span
-                  key={a}
-                  className="text-sm bg-white border border-line text-ink px-3 py-1.5 rounded-full"
-                >
-                  {a}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {bio && (
-          <div className="mt-10">
-            <p className="text-xs font-semibold text-brand uppercase tracking-widest">
-              About
-            </p>
-            <p className="mt-3 text-ink/85 leading-relaxed whitespace-pre-line">
-              {bio}
-            </p>
-          </div>
-        )}
       </div>
 
-      <aside className="space-y-4">
-        {budget && (
-          <div className="bg-white border border-line rounded-2xl p-6 shadow-sm">
-            <p className="text-xs uppercase tracking-widest text-muted">
-              Budget
+      {/* Body */}
+      <div className="mt-12 grid gap-12 lg:grid-cols-3">
+        <div className="lg:col-span-2 space-y-12">
+          {bio && (
+            <section>
+              <p className="text-xs uppercase tracking-[0.24em] text-brand font-semibold">
+                About
+              </p>
+              <p className="mt-4 text-ink/85 leading-relaxed whitespace-pre-line text-lg font-display italic">
+                "{bio}"
+              </p>
+            </section>
+          )}
+
+          <section>
+            <p className="text-xs uppercase tracking-[0.24em] text-brand font-semibold">
+              Preferences
             </p>
-            <p className="text-3xl font-bold text-ink font-display mt-2">
-              {budget}
-              <span className="text-base font-medium text-muted"> /mo</span>
+            <dl className="mt-5 divide-y divide-line">
+              <Row
+                label="Age"
+                value={typeof age === 'number' ? String(age) : null}
+              />
+              <Row label="Gender" value={GENDER_LABEL[gender] || null} />
+              <Row label="Occupation" value={occupation} />
+              <Row label="City" value={city} />
+              <Row
+                label="Lifestyle"
+                value={lifestyle && LIFESTYLE_LABEL[lifestyle]}
+              />
+              <Row
+                label="Smoking"
+                value={smoking && SMOKING_LABEL[smoking]}
+              />
+              <Row label="Pets" value={pets && PETS_LABEL[pets]} />
+            </dl>
+          </section>
+
+          {preferredAreas.length > 0 && (
+            <section>
+              <p className="text-xs uppercase tracking-[0.24em] text-brand font-semibold">
+                Preferred areas
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {preferredAreas.map((a) => (
+                  <span
+                    key={a}
+                    className="text-sm bg-white border border-line text-ink px-4 py-1.5 rounded-full"
+                  >
+                    {a}
+                  </span>
+                ))}
+              </div>
+            </section>
+          )}
+        </div>
+
+        {/* Sidebar */}
+        <aside className="space-y-4">
+          {budget && (
+            <div className="bg-white border border-line rounded-2xl p-6 shadow-sm">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted">
+                Budget
+              </p>
+              <p className="mt-3 font-display text-3xl text-ink">
+                {budget}
+                <span className="text-base text-muted"> /mo</span>
+              </p>
+            </div>
+          )}
+
+          <div className="bg-white border border-line rounded-2xl p-6 shadow-sm">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-muted">
+              Reach out
+            </p>
+            <p className="mt-3 text-sm text-muted leading-relaxed">
+              Say hi and see if you're a good fit.
+            </p>
+            {user?.email ? (
+              <a
+                href={`mailto:${user.email}?subject=${encodeURIComponent(
+                  'Roommate on HOMIGO'
+                )}`}
+                className="mt-5 block text-center bg-brand text-white hover:bg-brand-dark px-5 py-3 rounded-full text-sm font-medium transition"
+              >
+                Contact {name.split(' ')[0]}
+              </a>
+            ) : (
+              <button
+                disabled
+                className="mt-5 w-full text-center bg-sand text-muted px-5 py-3 rounded-full text-sm font-medium cursor-not-allowed"
+              >
+                Contact info unavailable
+              </button>
+            )}
+            <p className="mt-3 text-[11px] text-muted-soft text-center">
+              In-app chat coming later.
             </p>
           </div>
-        )}
+        </aside>
+      </div>
+    </>
+  );
+}
 
-        <div className="bg-white border border-line rounded-2xl p-6 shadow-sm">
-          <p className="text-xs font-semibold text-muted uppercase tracking-widest">
-            Reach out
-          </p>
-          <p className="mt-2 text-sm text-muted">
-            Say hi and see if you're a good fit.
-          </p>
-          {user?.email ? (
-            <a
-              href={`mailto:${user.email}?subject=${encodeURIComponent(
-                'Roommate on HOMIGO'
-              )}`}
-              className="mt-5 block text-center bg-brand text-white hover:bg-brand-dark px-4 py-2.5 rounded-md font-medium transition shadow-sm"
-            >
-              Contact {name.split(' ')[0]}
-            </a>
-          ) : (
-            <button
-              disabled
-              className="mt-5 w-full text-center bg-sand text-muted px-4 py-2.5 rounded-md font-medium cursor-not-allowed"
-            >
-              Contact info unavailable
-            </button>
-          )}
-          <p className="mt-3 text-xs text-muted-soft">
-            In-app chat coming later.
-          </p>
-        </div>
-      </aside>
+function Row({ label, value }) {
+  if (!value) return null;
+  return (
+    <div className="flex items-baseline justify-between gap-4 py-3">
+      <dt className="text-xs uppercase tracking-[0.2em] text-muted">{label}</dt>
+      <dd className="text-sm text-ink font-medium">{value}</dd>
     </div>
   );
 }

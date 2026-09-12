@@ -1,24 +1,5 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import FeatureCard from '../components/FeatureCard';
-
-const HomeIcon = (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-    <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955a1.5 1.5 0 0 1 2.12 0L22.28 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125h4.125v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-  </svg>
-);
-
-const UsersIcon = (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
-  </svg>
-);
-
-const ShieldIcon = (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 4.556-3.045 8.412-7.213 9.615a1.503 1.503 0 0 1-.87 0C8.744 20.412 5.7 16.556 5.7 12V6.375a1.5 1.5 0 0 1 .928-1.387c.31-.128 6.24-2.488 6.372-2.488s6.061 2.36 6.372 2.488a1.5 1.5 0 0 1 .928 1.387V12Z" />
-  </svg>
-);
 
 const CITIES = [
   'Bengaluru',
@@ -30,150 +11,212 @@ const CITIES = [
   'Jaipur',
 ];
 
-const STEPS = [
-  {
-    step: 1,
-    title: 'Create an account',
-    desc: 'Sign up as a Tenant (looking for a home) or an Owner (listing a property).',
-  },
-  {
-    step: 2,
-    title: 'Explore your city',
-    desc: 'Browse listings, save favorites, and check out roommate profiles.',
-  },
-  {
-    step: 3,
-    title: 'Find your fit',
-    desc: 'Reach out, move in, and settle into your new home with the right people.',
-  },
-];
+function Eyebrow({ children }) {
+  return (
+    <p className="text-xs uppercase tracking-[0.24em] text-brand font-semibold">
+      {children}
+    </p>
+  );
+}
+
+function HouseArt({ className = '' }) {
+  return (
+    <svg
+      viewBox="0 0 400 400"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M60 220 200 100 340 220" />
+      <path d="M90 210 V330 H310 V210" />
+      <path d="M180 330 V250 H220 V330" />
+      <path d="M120 240 H160 V275 H120 Z" />
+      <path d="M240 240 H280 V275 H240 Z" />
+      <path d="M60 340 H340" />
+    </svg>
+  );
+}
 
 export default function Home() {
   const { user } = useAuth();
 
   return (
     <>
-      {/* Hero */}
+      {/* HERO */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-x-0 top-0 h-[520px] bg-gradient-to-b from-sand-soft/50 to-ivory pointer-events-none" />
+        {/* Warm gradient background */}
+        <div
+          aria-hidden
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              'linear-gradient(135deg, #EFE6CE 0%, #F8F5EE 45%, #EFE6CE 100%)',
+          }}
+        />
 
-        <div className="relative max-w-4xl mx-auto px-6 pt-20 pb-16 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-white border border-line px-3 py-1 text-xs text-muted">
-            <span className="w-1.5 h-1.5 rounded-full bg-brand" />
-            City-based accommodation
-          </div>
+        <div className="relative max-w-7xl mx-auto px-6 pt-16 pb-24 md:pt-24 md:pb-32">
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+            {/* Left: copy */}
+            <div className="lg:col-span-7">
+              <Eyebrow>For students &amp; working professionals</Eyebrow>
 
-          <h1 className="mt-6 font-display text-5xl sm:text-6xl leading-[1.05] text-ink">
-            Find Your Home.
-            <br />
-            <span className="text-brand">Find Your People.</span>
-          </h1>
+              <h1 className="mt-6 font-display text-5xl sm:text-6xl lg:text-7xl leading-[1.02] tracking-tight text-ink">
+                Find your home.
+                <br />
+                <span className="italic text-brand">Find your people.</span>
+              </h1>
 
-          <p className="mt-6 text-lg text-muted max-w-2xl mx-auto leading-relaxed">
-            HOMIGO helps students and working professionals discover flats,
-            rooms and PGs — and match with compatible roommates who fit their
-            lifestyle.
-          </p>
+              <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted">
+                HOMIGO is a city-based accommodation platform for finding
+                flats, private rooms and PGs — and matching with roommates
+                whose lifestyle actually fits yours.
+              </p>
 
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-            <Link
-              to="/properties"
-              className="bg-brand text-white hover:bg-brand-dark px-6 py-3 rounded-md font-medium transition shadow-sm"
-            >
-              Browse Properties
-            </Link>
-            <Link
-              to="/roommates"
-              className="bg-white border border-line text-ink hover:bg-sand-soft px-6 py-3 rounded-md font-medium transition"
-            >
-              Find Roommates
-            </Link>
-          </div>
-
-          {!user && (
-            <p className="mt-6 text-sm text-muted">
-              New here?{' '}
-              <Link
-                to="/register"
-                className="text-brand font-medium hover:underline"
-              >
-                Create a free account
-              </Link>
-            </p>
-          )}
-
-          {/* Cities strip */}
-          <div className="mt-14">
-            <p className="text-xs uppercase tracking-widest text-muted-soft">
-              Now serving
-            </p>
-            <div className="mt-3 flex flex-wrap justify-center gap-2">
-              {CITIES.map((c) => (
-                <span
-                  key={c}
-                  className="text-sm bg-white border border-line text-ink px-3 py-1 rounded-full"
+              <div className="mt-10 flex flex-wrap items-center gap-3">
+                <Link
+                  to="/properties"
+                  className="bg-brand text-white hover:bg-brand-dark px-7 py-3.5 rounded-full text-sm font-medium tracking-wide transition shadow-sm"
                 >
-                  {c}
-                </span>
-              ))}
+                  Browse Properties
+                </Link>
+                <Link
+                  to="/roommates"
+                  className="bg-white border border-line hover:border-brand/40 text-ink px-7 py-3.5 rounded-full text-sm font-medium tracking-wide transition"
+                >
+                  Find Roommates
+                </Link>
+              </div>
+
+              {!user && (
+                <p className="mt-6 text-sm text-muted">
+                  New here?{' '}
+                  <Link
+                    to="/register"
+                    className="text-brand-dark font-medium hover:underline"
+                  >
+                    Create a free account →
+                  </Link>
+                </p>
+              )}
+            </div>
+
+            {/* Right: visual card */}
+            <div className="lg:col-span-5">
+              <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border border-line shadow-sm">
+                <div
+                  aria-hidden
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      'linear-gradient(180deg, #995F2F 0%, #622B14 100%)',
+                  }}
+                />
+                <HouseArt className="absolute inset-0 w-full h-full text-white/12 p-16" />
+
+                {/* Card content */}
+                <div className="relative h-full flex flex-col justify-between p-8 text-white">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.24em] text-sand">
+                      Now serving
+                    </p>
+                    <p className="mt-4 font-display text-2xl leading-snug">
+                      7 cities across India — and growing every month.
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    {CITIES.map((c) => (
+                      <span
+                        key={c}
+                        className="text-xs bg-white/12 backdrop-blur-sm border border-white/20 text-white px-3 py-1 rounded-full"
+                      >
+                        {c}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+
+          {/* Bottom rule / meta (Reference 1 vibe) */}
+          <div className="mt-16 md:mt-24 border-t border-line pt-6 flex flex-wrap items-center justify-between gap-3 text-xs text-muted">
+            <span className="tracking-wide">Bengaluru · India · 2026</span>
+            <span className="tracking-wide">homigo · find your home</span>
+          </div>
         </div>
       </section>
 
-      {/* Features */}
+      {/* WHAT WE OFFER — 3 columns editorial */}
       <section className="bg-ivory">
-        <div className="max-w-6xl mx-auto px-6 py-20">
-          <div className="text-center max-w-2xl mx-auto">
-            <p className="text-xs uppercase tracking-widest text-brand font-semibold">
-              What HOMIGO offers
-            </p>
-            <h2 className="mt-3 font-display text-3xl sm:text-4xl text-ink">
-              Everything you need to move in
+        <div className="max-w-7xl mx-auto px-6 py-24">
+          <div className="max-w-2xl">
+            <Eyebrow>What HOMIGO offers</Eyebrow>
+            <h2 className="mt-4 font-display text-4xl sm:text-5xl leading-tight tracking-tight text-ink">
+              A calmer way to find where you'll actually live.
             </h2>
-            <p className="mt-3 text-muted">
-              One place for both sides of the move — the flat, and the people
-              in it.
-            </p>
           </div>
 
-          <div className="mt-12 grid gap-5 sm:grid-cols-3">
-            <FeatureCard icon={HomeIcon} title="Discover Properties">
-              Search flats, private rooms and PGs across your city, filtered by
-              rent, type and amenities.
-            </FeatureCard>
-            <FeatureCard icon={UsersIcon} title="Compatible Roommates">
-              Match with people who share your budget, schedule and lifestyle —
-              not just the room.
-            </FeatureCard>
-            <FeatureCard icon={ShieldIcon} title="Owner-Verified Listings">
-              Each listing is posted by the owner themselves, so what you see is
-              what you get.
-            </FeatureCard>
+          <div className="mt-14 grid gap-x-10 gap-y-14 sm:grid-cols-3">
+            <FeatureBlock
+              n="01"
+              title="Discover properties"
+              body="Search flats, private rooms and PGs across your city — filtered by rent, type and amenities. Owner-verified listings only."
+            />
+            <FeatureBlock
+              n="02"
+              title="Meet compatible roommates"
+              body="Post a small profile and see who shares your budget, schedule and lifestyle. We rank matches — we never hide people."
+            />
+            <FeatureBlock
+              n="03"
+              title="Talk directly"
+              body="Reach out over email once you've found the right fit. No middlemen, no bidding, no drama."
+            />
           </div>
         </div>
       </section>
 
-      {/* How it works */}
-      <section className="bg-sand-soft/40 border-y border-line">
-        <div className="max-w-4xl mx-auto px-6 py-20">
-          <div className="text-center">
-            <p className="text-xs uppercase tracking-widest text-brand font-semibold">
-              How it works
-            </p>
-            <h2 className="mt-3 font-display text-3xl sm:text-4xl text-ink">
-              Move in in three steps
+      {/* HOW IT WORKS */}
+      <section className="border-t border-line bg-sand-soft/30">
+        <div className="max-w-6xl mx-auto px-6 py-24">
+          <div className="text-center max-w-xl mx-auto">
+            <Eyebrow>How it works</Eyebrow>
+            <h2 className="mt-4 font-display text-4xl leading-tight tracking-tight text-ink">
+              Move in in three steps.
             </h2>
           </div>
 
-          <div className="mt-12 grid gap-8 sm:grid-cols-3">
-            {STEPS.map((s) => (
+          <div className="mt-16 grid gap-12 sm:grid-cols-3">
+            {[
+              {
+                step: '01',
+                title: 'Create an account',
+                desc: 'Sign up as a Tenant (looking for a home) or an Owner (listing a property).',
+              },
+              {
+                step: '02',
+                title: 'Explore your city',
+                desc: 'Browse listings, save favorites, and check out roommate profiles.',
+              },
+              {
+                step: '03',
+                title: 'Find your fit',
+                desc: 'Reach out, move in, and settle into your new home with the right people.',
+              },
+            ].map((s) => (
               <div key={s.step} className="text-center">
-                <div className="w-11 h-11 mx-auto rounded-full bg-brand text-white flex items-center justify-center font-semibold shadow-sm">
+                <div className="inline-flex w-14 h-14 items-center justify-center rounded-full border border-sage text-sage font-display text-lg">
                   {s.step}
                 </div>
-                <h3 className="mt-4 font-semibold text-ink">{s.title}</h3>
-                <p className="mt-2 text-sm text-muted leading-relaxed">
+                <h3 className="mt-6 font-display text-xl text-ink">
+                  {s.title}
+                </h3>
+                <p className="mt-3 text-sm text-muted leading-relaxed max-w-xs mx-auto">
                   {s.desc}
                 </p>
               </div>
@@ -182,36 +225,43 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Final CTA */}
+      {/* CLOSING CTA */}
       <section className="bg-ivory">
-        <div className="max-w-3xl mx-auto px-6 py-20 text-center">
-          <h2 className="font-display text-3xl sm:text-4xl text-ink">
-            {user ? `Welcome back, ${user.name}` : 'Ready to find your home?'}
-          </h2>
-          <p className="mt-4 text-muted max-w-xl mx-auto">
+        <div className="max-w-4xl mx-auto px-6 py-24 text-center">
+          <Eyebrow>Ready when you are</Eyebrow>
+          <h2 className="mt-4 font-display text-4xl sm:text-5xl leading-tight tracking-tight text-ink">
             {user
-              ? 'Jump into your dashboard to pick up where you left off.'
+              ? `Welcome back, ${user.name.split(' ')[0]}.`
+              : 'Ready to find your home?'}
+          </h2>
+          <p className="mt-6 text-muted max-w-xl mx-auto leading-relaxed">
+            {user
+              ? 'Your dashboard is where your saved properties, listings and roommate profile live.'
               : 'Join HOMIGO to start browsing properties and roommates in your city.'}
           </p>
-          <div className="mt-8">
-            {user ? (
-              <Link
-                to="/dashboard"
-                className="bg-brand text-white hover:bg-brand-dark px-6 py-3 rounded-md font-medium transition shadow-sm"
-              >
-                Go to Dashboard
-              </Link>
-            ) : (
-              <Link
-                to="/register"
-                className="bg-brand text-white hover:bg-brand-dark px-6 py-3 rounded-md font-medium transition shadow-sm"
-              >
-                Get started — it's free
-              </Link>
-            )}
+          <div className="mt-10">
+            <Link
+              to={user ? '/dashboard' : '/register'}
+              className="bg-brand text-white hover:bg-brand-dark px-8 py-3.5 rounded-full text-sm font-medium tracking-wide transition shadow-sm"
+            >
+              {user ? 'Go to Dashboard' : "Get started — it's free"}
+            </Link>
           </div>
         </div>
       </section>
     </>
+  );
+}
+
+function FeatureBlock({ n, title, body }) {
+  return (
+    <div>
+      <p className="font-display text-xl text-brand">{n}</p>
+      <div className="mt-4 h-px w-10 bg-brand/40" />
+      <h3 className="mt-6 font-display text-2xl text-ink leading-snug">
+        {title}
+      </h3>
+      <p className="mt-4 text-sm text-muted leading-relaxed">{body}</p>
+    </div>
   );
 }

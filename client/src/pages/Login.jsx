@@ -30,11 +30,21 @@ export default function Login() {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-12 mb-16 bg-white shadow-sm rounded-2xl p-8 border border-line">
-      <h1 className="font-display text-3xl text-ink">Log in</h1>
-      <p className="mt-1 text-sm text-muted">Welcome back to HOMIGO.</p>
+    <div className="max-w-md mx-auto mt-16 mb-24 px-6">
+      <div className="text-center">
+        <p className="text-xs uppercase tracking-[0.24em] text-brand font-semibold">
+          Sign in
+        </p>
+        <h1 className="mt-3 font-display text-4xl text-ink">Welcome back.</h1>
+        <p className="mt-3 text-sm text-muted">
+          Continue where you left off.
+        </p>
+      </div>
 
-      <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+      <form
+        onSubmit={handleSubmit}
+        className="mt-10 bg-white border border-line rounded-2xl p-8 space-y-5 shadow-sm"
+      >
         <FormField
           label="Email"
           name="email"
@@ -59,9 +69,9 @@ export default function Login() {
         <button
           type="submit"
           disabled={submitting}
-          className="w-full bg-brand text-white hover:bg-brand-dark rounded-md py-2.5 font-medium disabled:opacity-50 transition shadow-sm"
+          className="w-full bg-brand text-white hover:bg-brand-dark rounded-full py-3 font-medium disabled:opacity-50 transition shadow-sm"
         >
-          {submitting ? 'Logging in...' : 'Log in'}
+          {submitting ? 'Logging in…' : 'Log in'}
         </button>
       </form>
 
@@ -69,7 +79,7 @@ export default function Login() {
         Don't have an account?{' '}
         <Link
           to="/register"
-          className="text-brand font-medium hover:underline"
+          className="text-brand-dark font-medium hover:underline"
         >
           Sign up
         </Link>

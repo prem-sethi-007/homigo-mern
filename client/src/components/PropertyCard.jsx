@@ -14,24 +14,21 @@ function formatRent(n) {
   return `₹${n.toLocaleString('en-IN')}`;
 }
 
-function Pill({ children }) {
-  return (
-    <span className="text-xs bg-sand-soft text-ink px-2.5 py-1 rounded-full font-medium">
-      {children}
-    </span>
-  );
-}
-
 function Placeholder() {
   return (
-    <div className="w-full aspect-[4/3] bg-sand-soft flex items-center justify-center text-brand/40">
+    <div
+      className="w-full h-full flex items-center justify-center text-white/25"
+      style={{
+        background: 'linear-gradient(160deg, #995F2F 0%, #622B14 100%)',
+      }}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
-        strokeWidth="1.2"
+        strokeWidth="1"
         stroke="currentColor"
-        className="w-16 h-16"
+        className="w-20 h-20"
       >
         <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955a1.5 1.5 0 0 1 2.12 0L22.28 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125h4.125v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
       </svg>
@@ -90,7 +87,7 @@ export default function PropertyCard({ property }) {
     try {
       await toggleFavorite(_id);
     } catch {
-      // toggleFavorite already reverted on error
+      // toggleFavorite reverts on error
     }
     setPending(false);
   }
@@ -101,34 +98,40 @@ export default function PropertyCard({ property }) {
     ? 'Remove from favorites'
     : 'Save to favorites';
 
+  const metaBits = [
+    type && TYPE_LABEL[type],
+    typeof bedrooms === 'number' && bedrooms > 0 && `${bedrooms} BHK`,
+    furnishing && FURNISH_LABEL[furnishing],
+  ].filter(Boolean);
+
   return (
-    <Link
-      to={`/properties/${_id}`}
-      className="block bg-white border border-line rounded-2xl overflow-hidden hover:border-brand/40 hover:shadow-md transition"
-    >
-      <div className="relative">
+    <Link to={`/properties/${_id}`} className="block group">
+      {/* Image */}
+      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-sand-soft">
         {images && images[0] ? (
           <img
             src={images[0]}
             alt={title}
-            className="w-full aspect-[4/3] object-cover"
+            className="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-105"
           />
         ) : (
           <Placeholder />
         )}
 
-        <div className="absolute top-3 left-3 flex gap-1.5">
+        {/* Availability badge */}
+        <div className="absolute top-4 left-4">
           {available !== false ? (
-            <span className="text-xs font-medium bg-sage-soft text-sage-dark px-2.5 py-1 rounded-full">
+            <span className="text-[10px] font-semibold uppercase tracking-[0.2em] bg-white/95 text-ink px-3 py-1.5 rounded-full">
               Available
             </span>
           ) : (
-            <span className="text-xs font-medium bg-white/95 text-muted px-2.5 py-1 rounded-full">
+            <span className="text-[10px] font-semibold uppercase tracking-[0.2em] bg-ink/80 text-white px-3 py-1.5 rounded-full">
               Not available
             </span>
           )}
         </div>
 
+        {/* Heart */}
         <button
           type="button"
           onClick={handleHeart}
@@ -136,7 +139,7 @@ export default function PropertyCard({ property }) {
           aria-label={heartTitle}
           title={heartTitle}
           className={
-            'absolute top-3 right-3 w-9 h-9 rounded-full bg-white/95 hover:bg-white shadow flex items-center justify-center disabled:opacity-60 transition ' +
+            'absolute top-4 right-4 w-10 h-10 rounded-full bg-white/95 hover:bg-white shadow-sm flex items-center justify-center disabled:opacity-60 transition ' +
             (favorited ? 'text-brand' : 'text-muted-soft')
           }
         >
@@ -144,35 +147,34 @@ export default function PropertyCard({ property }) {
         </button>
       </div>
 
-      <div className="p-5">
-        <h3 className="font-semibold text-ink line-clamp-1 text-base">
-          {title}
-        </h3>
-        {city && <p className="mt-0.5 text-sm text-muted">{city}</p>}
-
-        <div className="mt-3 flex flex-wrap gap-1.5">
-          {type && <Pill>{TYPE_LABEL[type] || type}</Pill>}
-          {typeof bedrooms === 'number' && bedrooms > 0 && (
-            <Pill>{bedrooms} BHK</Pill>
-          )}
-          {furnishing && (
-            <Pill>{FURNISH_LABEL[furnishing] || furnishing}</Pill>
-          )}
-        </div>
-
-        <div className="mt-5 flex items-end justify-between gap-2">
-          <div>
-            <p className="text-xl font-bold text-ink font-display">
-              {formatRent(rent)}
-              <span className="text-sm font-medium text-muted"> /mo</span>
+      {/* Details */}
+      <div className="mt-4 px-1">
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <p className="text-[11px] uppercase tracking-[0.2em] text-muted-soft">
+              {city || 'Location'}
             </p>
+            <h3 className="mt-1 font-display text-xl text-ink line-clamp-1 leading-snug">
+              {title}
+            </h3>
           </div>
-          {owner && owner.name && (
-            <p className="text-xs text-muted-soft truncate max-w-[45%]">
-              by {owner.name}
-            </p>
-          )}
+          <p className="text-right whitespace-nowrap">
+            <span className="font-display text-xl text-ink">
+              {formatRent(rent)}
+            </span>
+            <span className="text-xs text-muted"> /mo</span>
+          </p>
         </div>
+
+        {metaBits.length > 0 && (
+          <p className="mt-3 text-xs text-muted tracking-wide">
+            {metaBits.join(' · ')}
+          </p>
+        )}
+
+        {owner?.name && (
+          <p className="mt-2 text-xs text-muted-soft">by {owner.name}</p>
+        )}
       </div>
     </Link>
   );

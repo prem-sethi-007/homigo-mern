@@ -22,30 +22,31 @@ const IcChart = (
 export default function OwnerDashboard() {
   return (
     <div>
-      <div className="bg-brand text-white rounded-2xl p-6 sm:p-8 shadow-sm">
-        <div className="flex items-start justify-between gap-4 flex-wrap">
-          <div className="max-w-xl">
-            <p className="text-xs uppercase tracking-widest text-brand-soft">
+      {/* Editorial banner: cream, not overwhelming */}
+      <div className="bg-sand-soft border border-line rounded-2xl p-8 sm:p-10">
+        <div className="flex items-start justify-between gap-6 flex-wrap">
+          <div className="max-w-lg">
+            <p className="text-[10px] uppercase tracking-[0.24em] text-brand font-semibold">
               Get started
             </p>
-            <h2 className="mt-2 font-display text-2xl sm:text-3xl">
-              List a property in minutes
+            <h2 className="mt-3 font-display text-3xl sm:text-4xl leading-tight text-ink">
+              List a property in minutes.
             </h2>
-            <p className="mt-2 text-sm text-brand-soft/90">
+            <p className="mt-3 text-sm text-muted leading-relaxed">
               Add photos, rent and amenities. Tenants across cities can find
               your listing right away.
             </p>
           </div>
           <Link
             to="/properties/new"
-            className="bg-white text-brand hover:bg-brand-soft px-5 py-2.5 rounded-md text-sm font-semibold transition shadow-sm whitespace-nowrap"
+            className="bg-brand text-white hover:bg-brand-dark px-6 py-3 rounded-full text-sm font-medium transition whitespace-nowrap"
           >
             + Add a property
           </Link>
         </div>
       </div>
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         <DashboardCard
           icon={IcPlus}
           title="Add a Property"

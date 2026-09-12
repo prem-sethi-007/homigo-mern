@@ -69,48 +69,50 @@ export default function Properties() {
     activeFilters.maxRent !== '';
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-12">
-      <div className="flex items-end justify-between flex-wrap gap-4">
+    <div className="max-w-7xl mx-auto px-6 pt-16 pb-24">
+      {/* Header */}
+      <div className="flex items-end justify-between flex-wrap gap-6 border-b border-line pb-8">
         <div>
-          <p className="text-xs uppercase tracking-widest text-brand font-semibold">
-            Properties
+          <p className="text-xs uppercase tracking-[0.24em] text-brand font-semibold">
+            Homes
           </p>
-          <h1 className="mt-1 font-display text-3xl sm:text-4xl text-ink">
-            Browse homes across cities
+          <h1 className="mt-3 font-display text-5xl sm:text-6xl leading-[1.02] tracking-tight text-ink">
+            Browse the marketplace.
           </h1>
-          <p className="mt-2 text-muted">
-            Flats, private rooms and PGs — filter by city and budget.
+          <p className="mt-4 text-muted max-w-xl">
+            Flats, private rooms and PGs across cities — filter by budget or
+            type, tap the heart to save.
           </p>
         </div>
         {state.status === 'success' && (
-          <p className="text-sm text-muted">
+          <p className="text-xs uppercase tracking-[0.2em] text-muted">
             {state.properties.length} listing
             {state.properties.length === 1 ? '' : 's'}
           </p>
         )}
       </div>
 
-      <form
-        onSubmit={handleSubmit}
-        className="mt-8 bg-white border border-line rounded-2xl p-5 shadow-sm"
-      >
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          <FilterField
-            label="City"
-            name="city"
-            value={filters.city}
-            onChange={updateField}
-            placeholder="e.g. Bengaluru"
-          />
+      {/* Filters */}
+      <form onSubmit={handleSubmit} className="mt-8">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="lg:col-span-2">
+            <Field
+              label="City"
+              name="city"
+              value={filters.city}
+              onChange={updateField}
+              placeholder="Bengaluru, Mumbai…"
+            />
+          </div>
           <label className="block">
-            <span className="text-xs font-semibold uppercase tracking-wide text-muted">
+            <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted">
               Type
             </span>
             <select
               name="type"
               value={filters.type}
               onChange={updateField}
-              className="mt-1.5 w-full border border-line rounded-md px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand/50"
+              className="mt-2 w-full border border-line rounded-full px-4 py-2.5 text-sm bg-white focus:outline-none focus:border-brand/50 focus:ring-1 focus:ring-brand/40 transition"
             >
               <option value="">Any</option>
               <option value="flat">Flat</option>
@@ -118,7 +120,7 @@ export default function Properties() {
               <option value="pg">PG</option>
             </select>
           </label>
-          <FilterField
+          <Field
             label="Min rent (₹)"
             name="minRent"
             type="number"
@@ -127,7 +129,7 @@ export default function Properties() {
             onChange={updateField}
             placeholder="0"
           />
-          <FilterField
+          <Field
             label="Max rent (₹)"
             name="maxRent"
             type="number"
@@ -137,59 +139,61 @@ export default function Properties() {
             placeholder="Any"
           />
         </div>
-        <div className="mt-4 flex flex-wrap items-center gap-2 justify-end">
+        <div className="mt-4 flex flex-wrap items-center gap-3 justify-end">
           <button
             type="button"
             onClick={handleClear}
-            className="text-sm font-medium bg-sand hover:bg-sand-soft text-ink px-3.5 py-2 rounded-md transition"
+            className="text-sm text-muted hover:text-ink transition"
           >
             Clear
           </button>
           <button
             type="submit"
-            className="text-sm font-medium bg-brand text-white hover:bg-brand-dark px-5 py-2 rounded-md transition shadow-sm"
+            className="text-sm font-medium bg-brand text-white hover:bg-brand-dark px-6 py-2.5 rounded-full transition"
           >
             Apply filters
           </button>
         </div>
       </form>
 
+      {/* Active chips */}
       {hasActive && (
         <div className="mt-5 flex flex-wrap items-center gap-2">
-          <span className="text-xs uppercase tracking-widest text-muted">
-            Active:
+          <span className="text-[10px] uppercase tracking-[0.2em] text-muted">
+            Active
           </span>
-          {activeFilters.city && <Chip>City: {activeFilters.city}</Chip>}
+          {activeFilters.city && <Chip>City · {activeFilters.city}</Chip>}
           {activeFilters.type && (
             <Chip>
-              Type: {TYPE_LABEL[activeFilters.type] || activeFilters.type}
+              Type · {TYPE_LABEL[activeFilters.type] || activeFilters.type}
             </Chip>
           )}
           {activeFilters.minRent !== '' && (
             <Chip>
-              Min: ₹{Number(activeFilters.minRent).toLocaleString('en-IN')}
+              Min · ₹{Number(activeFilters.minRent).toLocaleString('en-IN')}
             </Chip>
           )}
           {activeFilters.maxRent !== '' && (
             <Chip>
-              Max: ₹{Number(activeFilters.maxRent).toLocaleString('en-IN')}
+              Max · ₹{Number(activeFilters.maxRent).toLocaleString('en-IN')}
             </Chip>
           )}
         </div>
       )}
 
-      <div className="mt-8">
+      {/* Grid */}
+      <div className="mt-12">
         {state.status === 'loading' && <LoadingGrid />}
 
         {state.status === 'error' && (
-          <div className="bg-white border border-error-soft rounded-2xl p-6 text-center">
-            <p className="font-semibold text-error-dark">
+          <div className="bg-white border border-error-soft rounded-2xl p-8 text-center">
+            <p className="font-display text-lg text-error-dark">
               Could not load properties
             </p>
-            <p className="mt-1 text-sm text-muted">{state.message}</p>
+            <p className="mt-2 text-sm text-muted">{state.message}</p>
             <button
               onClick={() => load(activeFilters)}
-              className="mt-4 bg-brand text-white hover:bg-brand-dark px-4 py-2 rounded-md font-medium transition"
+              className="mt-6 bg-brand text-white hover:bg-brand-dark px-5 py-2.5 rounded-full text-sm font-medium transition"
             >
               Try again
             </button>
@@ -197,28 +201,28 @@ export default function Properties() {
         )}
 
         {state.status === 'success' && state.properties.length === 0 && (
-          <div className="bg-white border border-line rounded-2xl p-10 text-center">
-            <p className="font-semibold text-ink">
+          <div className="border border-line rounded-2xl p-14 text-center">
+            <p className="font-display text-2xl text-ink">
               {hasActive
-                ? 'No properties match your filters'
-                : 'No properties yet'}
+                ? 'No properties match your filters.'
+                : 'No properties yet.'}
             </p>
-            <p className="mt-2 text-sm text-muted">
+            <p className="mt-3 text-sm text-muted">
               {hasActive
-                ? 'Try broadening your search or clear your filters.'
-                : 'Check back soon — or sign up as an Owner to be the first to list one.'}
+                ? 'Try broadening your search — or clear filters entirely.'
+                : 'Check back soon, or sign up as an Owner to be the first to list.'}
             </p>
             {hasActive ? (
               <button
                 onClick={handleClear}
-                className="inline-block mt-5 bg-brand text-white hover:bg-brand-dark px-4 py-2 rounded-md font-medium transition"
+                className="inline-block mt-6 bg-brand text-white hover:bg-brand-dark px-5 py-2.5 rounded-full text-sm font-medium transition"
               >
                 Clear filters
               </button>
             ) : (
               <Link
                 to="/"
-                className="inline-block mt-5 bg-brand text-white hover:bg-brand-dark px-4 py-2 rounded-md font-medium transition"
+                className="inline-block mt-6 bg-brand text-white hover:bg-brand-dark px-5 py-2.5 rounded-full text-sm font-medium transition"
               >
                 Back to home
               </Link>
@@ -227,7 +231,7 @@ export default function Properties() {
         )}
 
         {state.status === 'success' && state.properties.length > 0 && (
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {state.properties.map((p) => (
               <PropertyCard key={p._id} property={p} />
             ))}
@@ -238,15 +242,15 @@ export default function Properties() {
   );
 }
 
-function FilterField({ label, ...inputProps }) {
+function Field({ label, ...props }) {
   return (
     <label className="block">
-      <span className="text-xs font-semibold uppercase tracking-wide text-muted">
+      <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted">
         {label}
       </span>
       <input
-        {...inputProps}
-        className="mt-1.5 w-full border border-line rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand/50"
+        {...props}
+        className="mt-2 w-full border border-line rounded-full px-4 py-2.5 text-sm focus:outline-none focus:border-brand/50 focus:ring-1 focus:ring-brand/40 transition"
       />
     </label>
   );
@@ -254,7 +258,7 @@ function FilterField({ label, ...inputProps }) {
 
 function Chip({ children }) {
   return (
-    <span className="text-xs font-medium bg-brand-soft text-brand-dark px-3 py-1 rounded-full">
+    <span className="text-xs font-medium bg-sand-soft text-ink px-3 py-1.5 rounded-full">
       {children}
     </span>
   );
@@ -262,17 +266,14 @@ function Chip({ children }) {
 
 function LoadingGrid() {
   return (
-    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
       {[0, 1, 2, 3, 4, 5].map((i) => (
-        <div
-          key={i}
-          className="bg-white border border-line rounded-2xl overflow-hidden"
-        >
-          <div className="aspect-[4/3] bg-sand-soft animate-pulse" />
-          <div className="p-5 space-y-3">
-            <div className="h-4 bg-sand-soft rounded animate-pulse w-3/4" />
+        <div key={i}>
+          <div className="aspect-[4/5] bg-sand-soft rounded-2xl animate-pulse" />
+          <div className="mt-4 px-1 space-y-3">
+            <div className="h-3 bg-sand-soft rounded animate-pulse w-1/3" />
+            <div className="h-5 bg-sand-soft rounded animate-pulse w-3/4" />
             <div className="h-3 bg-sand-soft rounded animate-pulse w-1/2" />
-            <div className="h-5 bg-sand-soft rounded animate-pulse w-1/3" />
           </div>
         </div>
       ))}

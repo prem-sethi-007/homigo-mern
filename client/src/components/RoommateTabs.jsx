@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 
 function tabClass(active) {
-  const base = 'py-3 text-sm font-medium border-b-2 transition ';
+  const base =
+    'pb-3 text-xs font-semibold uppercase tracking-[0.2em] border-b-2 transition ';
   return (
     base +
     (active
@@ -12,8 +13,8 @@ function tabClass(active) {
 
 export default function RoommateTabs({ current }) {
   return (
-    <div className="mt-6 border-b border-line">
-      <nav className="flex gap-6 -mb-px">
+    <div className="mt-8 border-b border-line">
+      <nav className="flex gap-10 -mb-px">
         <Link to="/roommates" className={tabClass(current === 'all')}>
           Browse all
         </Link>
@@ -21,7 +22,7 @@ export default function RoommateTabs({ current }) {
           to="/roommates/recommended"
           className={tabClass(current === 'recommended')}
         >
-          Recommended for you
+          Recommended
         </Link>
       </nav>
     </div>

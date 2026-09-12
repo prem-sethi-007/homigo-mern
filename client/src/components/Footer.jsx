@@ -3,57 +3,60 @@ import { Link } from 'react-router-dom';
 export default function Footer() {
   return (
     <footer className="mt-auto bg-ink text-sand-soft">
-      <div className="max-w-6xl mx-auto px-6 py-12 grid gap-10 sm:grid-cols-3">
-        <div>
-          <p className="text-white font-bold text-xl flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-brand" />
-            HOMIGO
-          </p>
-          <p className="mt-3 text-sm text-sand-soft/70 max-w-xs">
-            Find Your Home. Find Your People. A city-based accommodation
-            platform for students and working professionals.
-          </p>
+      <div className="max-w-7xl mx-auto px-6 py-16">
+        <div className="grid gap-12 sm:grid-cols-4">
+          <div className="sm:col-span-2 max-w-sm">
+            <p className="text-white font-display text-2xl flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-sm bg-brand" />
+              HOMIGO
+            </p>
+            <p className="mt-4 text-sm text-sand-soft/70 leading-relaxed">
+              A city-based accommodation platform for students and working
+              professionals — find flats, rooms, and the right people to live
+              with.
+            </p>
+          </div>
+
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.24em] text-white/70">
+              Explore
+            </p>
+            <ul className="mt-5 space-y-3 text-sm">
+              <li>
+                <Link to="/properties" className="hover:text-white transition">
+                  Browse Properties
+                </Link>
+              </li>
+              <li>
+                <Link to="/roommates" className="hover:text-white transition">
+                  Find Roommates
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.24em] text-white/70">
+              Account
+            </p>
+            <ul className="mt-5 space-y-3 text-sm">
+              <li>
+                <Link to="/register" className="hover:text-white transition">
+                  Sign up
+                </Link>
+              </li>
+              <li>
+                <Link to="/login" className="hover:text-white transition">
+                  Log in
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        <div>
-          <p className="text-white text-sm font-semibold tracking-wide uppercase">
-            Explore
-          </p>
-          <ul className="mt-4 space-y-2.5 text-sm">
-            <li>
-              <Link to="/properties" className="hover:text-white transition">
-                Browse Properties
-              </Link>
-            </li>
-            <li>
-              <Link to="/roommates" className="hover:text-white transition">
-                Find Roommates
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <p className="text-white text-sm font-semibold tracking-wide uppercase">
-            Account
-          </p>
-          <ul className="mt-4 space-y-2.5 text-sm">
-            <li>
-              <Link to="/register" className="hover:text-white transition">
-                Sign up
-              </Link>
-            </li>
-            <li>
-              <Link to="/login" className="hover:text-white transition">
-                Log in
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div className="border-t border-white/10">
-        <div className="max-w-6xl mx-auto px-6 py-5 text-xs text-sand-soft/50 text-center">
-          HOMIGO — a MERN college project
+        <div className="mt-14 pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs text-sand-soft/50 tracking-wide">
+          <p>HOMIGO — a MERN college project · 2026</p>
+          <p>Find your home. Find your people.</p>
         </div>
       </div>
     </footer>
