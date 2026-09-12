@@ -37,13 +37,23 @@ export default function Register() {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-12 mb-16 bg-white shadow-sm rounded-2xl p-8 border border-line">
-      <h1 className="font-display text-3xl text-ink">Create account</h1>
-      <p className="mt-1 text-sm text-muted">
-        Join HOMIGO to find your home and your people.
-      </p>
+    <div className="max-w-md mx-auto mt-16 mb-24 px-6">
+      <div className="text-center">
+        <p className="text-xs uppercase tracking-[0.24em] text-brand font-semibold">
+          Join HOMIGO
+        </p>
+        <h1 className="mt-3 font-display text-4xl text-ink">
+          Create your account.
+        </h1>
+        <p className="mt-3 text-sm text-muted">
+          Find your home. Find your people.
+        </p>
+      </div>
 
-      <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+      <form
+        onSubmit={handleSubmit}
+        className="mt-10 bg-white border border-line rounded-2xl p-8 space-y-5 shadow-sm"
+      >
         <FormField
           label="Name"
           name="name"
@@ -78,7 +88,7 @@ export default function Register() {
             name="role"
             value={form.role}
             onChange={updateField}
-            className="mt-1.5 w-full border border-line rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand/50 transition"
+            className="mt-1.5 w-full border border-line rounded-full px-4 py-2.5 bg-white focus:outline-none focus:border-brand/50 focus:ring-1 focus:ring-brand/40 transition"
           >
             <option value="tenant">Tenant (looking for a place)</option>
             <option value="owner">Owner (listing a property)</option>
@@ -103,15 +113,15 @@ export default function Register() {
         <button
           type="submit"
           disabled={submitting}
-          className="w-full bg-brand text-white hover:bg-brand-dark rounded-md py-2.5 font-medium disabled:opacity-50 transition shadow-sm"
+          className="w-full bg-brand text-white hover:bg-brand-dark rounded-full py-3 font-medium disabled:opacity-50 transition shadow-sm"
         >
-          {submitting ? 'Creating account...' : 'Create account'}
+          {submitting ? 'Creating account…' : 'Create account'}
         </button>
       </form>
 
       <p className="text-sm text-muted mt-6 text-center">
         Already have an account?{' '}
-        <Link to="/login" className="text-brand font-medium hover:underline">
+        <Link to="/login" className="text-brand-dark font-medium hover:underline">
           Log in
         </Link>
       </p>

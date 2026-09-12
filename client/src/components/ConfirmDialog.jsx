@@ -11,16 +11,18 @@ export default function ConfirmDialog({
 }) {
   if (!open) return null;
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/40">
-      <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 border border-line">
-        <h3 className="text-lg font-semibold text-ink">{title}</h3>
-        {message && <p className="mt-2 text-sm text-muted">{message}</p>}
-        <div className="mt-6 flex justify-end gap-2">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-ink/50">
+      <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-8 border border-line">
+        <h3 className="font-display text-2xl text-ink">{title}</h3>
+        {message && (
+          <p className="mt-3 text-sm text-muted leading-relaxed">{message}</p>
+        )}
+        <div className="mt-8 flex justify-end gap-3">
           <button
             type="button"
             onClick={onCancel}
             disabled={submitting}
-            className="text-sm font-medium bg-sand hover:bg-sand-soft text-ink px-4 py-2 rounded-md disabled:opacity-50 transition"
+            className="text-sm text-muted hover:text-ink px-4 py-2 disabled:opacity-50 transition"
           >
             {cancelLabel}
           </button>
@@ -29,13 +31,13 @@ export default function ConfirmDialog({
             onClick={onConfirm}
             disabled={submitting}
             className={
-              'text-sm font-medium text-white px-4 py-2 rounded-md disabled:opacity-50 transition shadow-sm ' +
+              'text-sm font-medium text-white px-6 py-2.5 rounded-full disabled:opacity-50 transition shadow-sm ' +
               (danger
                 ? 'bg-error hover:bg-error-dark'
                 : 'bg-brand hover:bg-brand-dark')
             }
           >
-            {submitting ? 'Working...' : confirmLabel}
+            {submitting ? 'Working…' : confirmLabel}
           </button>
         </div>
       </div>

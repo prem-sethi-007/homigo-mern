@@ -54,6 +54,9 @@ function toPayload(f) {
   };
 }
 
+const selectCls =
+  'mt-1.5 w-full border border-line rounded-full px-4 py-2.5 bg-white focus:outline-none focus:border-brand/50 focus:ring-1 focus:ring-brand/40 transition';
+
 export default function PropertyForm({
   initial,
   submitLabel = 'Save',
@@ -77,7 +80,7 @@ export default function PropertyForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white border border-line rounded-2xl p-6 space-y-6 shadow-sm"
+      className="bg-white border border-line rounded-2xl p-8 space-y-6 shadow-sm"
     >
       <FormField
         label="Title *"
@@ -95,7 +98,7 @@ export default function PropertyForm({
           value={form.description}
           onChange={updateField}
           rows={4}
-          className="mt-1.5 w-full border border-line rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-brand/50 focus:border-brand/50 transition"
+          className="mt-1.5 w-full border border-line rounded-2xl px-4 py-3 focus:outline-none focus:border-brand/50 focus:ring-1 focus:ring-brand/40 transition"
           placeholder="What's the place like?"
         />
       </label>
@@ -107,7 +110,7 @@ export default function PropertyForm({
             name="type"
             value={form.type}
             onChange={updateField}
-            className="mt-1.5 w-full border border-line rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-brand/50"
+            className={selectCls}
           >
             <option value="flat">Flat</option>
             <option value="room">Room</option>
@@ -158,7 +161,7 @@ export default function PropertyForm({
             name="furnishing"
             value={form.furnishing}
             onChange={updateField}
-            className="mt-1.5 w-full border border-line rounded-md px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-brand/50"
+            className={selectCls}
           >
             <option value="">Not specified</option>
             <option value="furnished">Furnished</option>
@@ -181,7 +184,7 @@ export default function PropertyForm({
         name="images"
         value={form.images}
         onChange={updateField}
-        placeholder="https://... , https://..."
+        placeholder="https://… , https://…"
       />
 
       <label className="flex items-center gap-2">
@@ -199,13 +202,13 @@ export default function PropertyForm({
 
       {error && <p className="text-sm text-error-dark">{error}</p>}
 
-      <div className="flex justify-end gap-2 pt-2">
+      <div className="flex justify-end gap-3 pt-2">
         {onCancel && (
           <button
             type="button"
             onClick={onCancel}
             disabled={submitting}
-            className="text-sm font-medium bg-sand hover:bg-sand-soft text-ink px-4 py-2 rounded-md disabled:opacity-50 transition"
+            className="text-sm text-muted hover:text-ink px-4 py-2 disabled:opacity-50 transition"
           >
             Cancel
           </button>
@@ -213,9 +216,9 @@ export default function PropertyForm({
         <button
           type="submit"
           disabled={submitting}
-          className="text-sm font-medium bg-brand text-white hover:bg-brand-dark px-5 py-2 rounded-md disabled:opacity-50 transition shadow-sm"
+          className="text-sm font-medium bg-brand text-white hover:bg-brand-dark px-6 py-2.5 rounded-full disabled:opacity-50 transition shadow-sm"
         >
-          {submitting ? 'Saving...' : submitLabel}
+          {submitting ? 'Saving…' : submitLabel}
         </button>
       </div>
     </form>
