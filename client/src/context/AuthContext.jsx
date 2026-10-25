@@ -27,8 +27,12 @@ export function AuthProvider({ children }) {
         setUser(data.user);
         setFavoriteIds(idsFromUser(data.user));
       })
-      .catch(() => {
-        localStorage.removeItem(TOKEN_KEY);
+      .catch((err) => {
+        // Only drop the session when the server says the token is bad.
+        // A cold-starting host, network blip or 5xx must not log people out.
+        if (err.response?.status === 401) {
+          localStorage.removeItem(TOKEN_KEY);
+        }
         setUser(null);
         setFavoriteIds(new Set());
       })

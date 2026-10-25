@@ -15,6 +15,13 @@ if (!process.env.JWT_SECRET) {
   process.exit(1);
 }
 
+if (process.env.NODE_ENV === 'production' && process.env.JWT_SECRET.length < 32) {
+  console.error(
+    'JWT_SECRET is too short for production (use 32+ random characters).'
+  );
+  process.exit(1);
+}
+
 const app = express();
 
 // CORS: always allow local dev origins, plus any origins listed in
@@ -58,6 +65,24 @@ app.use('/api/auth', authRoutes);
 app.use('/api/properties', propertyRoutes);
 app.use('/api/favorites', favoriteRoutes);
 app.use('/api/roommates', roommateRoutes);
+
+// Unknown API routes -> JSON 404 (instead of Express's HTML page)
+app.use('/api', (req, res) => {
+  res.status(404).json({ message: 'Route not found' });
+});
+
+// Last-resort error handler: bad JSON bodies, etc. Never leaks stack traces.
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
+  if (err.type === 'entity.parse.failed') {
+    return res.status(400).json({ message: 'Invalid JSON body' });
+  }
+  if (err.type === 'entity.too.large') {
+    return res.status(413).json({ message: 'Request body too large' });
+  }
+  console.error('unhandled error:', err);
+  res.status(err.status || 500).json({ message: 'Server error' });
+});
 
 const PORT = process.env.PORT || 5000;
 const HOST = '0.0.0.0';

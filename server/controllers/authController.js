@@ -16,6 +16,11 @@ async function register(req, res) {
         message: 'name, email, password and role are required',
       });
     }
+    if (typeof email !== 'string' || typeof password !== 'string') {
+      return res
+        .status(400)
+        .json({ message: 'email and password must be strings' });
+    }
 
     const existing = await User.findOne({ email: email.toLowerCase() });
     if (existing) {
@@ -53,6 +58,11 @@ async function login(req, res) {
       return res.status(400).json({
         message: 'email and password are required',
       });
+    }
+    if (typeof email !== 'string' || typeof password !== 'string') {
+      return res
+        .status(400)
+        .json({ message: 'email and password must be strings' });
     }
 
     const user = await User.findOne({ email: email.toLowerCase() });
