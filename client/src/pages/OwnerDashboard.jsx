@@ -22,8 +22,8 @@ const IcChart = (
 export default function OwnerDashboard() {
   return (
     <div>
-      {/* Editorial banner: cream, not overwhelming */}
-      <div className="bg-sand-soft border border-line rounded-2xl p-8 sm:p-10">
+      {/* Colourful welcome banner */}
+      <div className="relative overflow-hidden bg-gradient-to-br from-marigold-soft via-sand-soft to-teal-soft border border-line rounded-2xl p-8 sm:p-10">
         <div className="flex items-start justify-between gap-6 flex-wrap">
           <div className="max-w-lg">
             <p className="text-[10px] uppercase tracking-[0.24em] text-brand font-semibold">
@@ -39,7 +39,7 @@ export default function OwnerDashboard() {
           </div>
           <Link
             to="/properties/new"
-            className="bg-brand text-white hover:bg-brand-dark px-6 py-3 rounded-full text-sm font-medium transition whitespace-nowrap"
+            className="bg-brand-gradient text-white hover:brightness-110 px-6 py-3 rounded-full text-sm font-medium transition whitespace-nowrap shadow-glow"
           >
             + Add a property
           </Link>
@@ -49,18 +49,21 @@ export default function OwnerDashboard() {
       <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         <DashboardCard
           icon={IcPlus}
+          tone="brand"
           title="Add a Property"
           description="List a flat, room or PG for tenants to discover."
           to="/properties/new"
         />
         <DashboardCard
           icon={IcList}
+          tone="teal"
           title="My Listings"
           description="Manage the properties you've posted so far."
           to="/properties/mine"
         />
         <DashboardCard
           icon={IcChart}
+          tone="marigold"
           title="Listing Insights"
           description="See how many people are viewing and saving your properties."
           comingSoon

@@ -30,8 +30,21 @@ function formatBudget(min, max) {
 
 function scoreBg(score) {
   if (score >= 80) return 'bg-sage text-white';
-  if (score >= 60) return 'bg-brand text-white';
-  return 'bg-sand text-ink';
+  if (score >= 60) return 'bg-teal text-white';
+  return 'bg-marigold-soft text-marigold-dark';
+}
+
+const AVATAR_BG = [
+  'bg-gradient-to-br from-brand to-[#F08A2C]',
+  'bg-gradient-to-br from-teal-dark to-teal',
+  'bg-gradient-to-br from-[#F2784B] to-marigold',
+  'bg-gradient-to-br from-sage to-teal',
+];
+
+function avatarBg(name) {
+  let sum = 0;
+  for (let i = 0; i < (name || '').length; i++) sum += name.charCodeAt(i);
+  return AVATAR_BG[sum % AVATAR_BG.length];
 }
 
 export default function RoommateCard({ profile, match }) {
@@ -65,7 +78,11 @@ export default function RoommateCard({ profile, match }) {
     >
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-4 min-w-0">
-          <div className="w-14 h-14 rounded-full bg-brand-soft text-brand flex items-center justify-center font-display text-lg flex-shrink-0">
+          <div
+            className={`w-14 h-14 rounded-full text-white flex items-center justify-center font-display text-lg flex-shrink-0 shadow-sm ${avatarBg(
+              name
+            )}`}
+          >
             {initials(name)}
           </div>
           <div className="min-w-0">

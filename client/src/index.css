@@ -10,6 +10,19 @@
   }
   body {
     background-color: theme('colors.ivory');
+    /* Soft warm/cool colour washes in the corners of every page */
+    background-image:
+      radial-gradient(
+        900px 500px at 0% 0%,
+        rgba(244, 166, 42, 0.12),
+        transparent 60%
+      ),
+      radial-gradient(
+        800px 500px at 100% 0%,
+        rgba(14, 143, 152, 0.1),
+        transparent 60%
+      );
+    background-repeat: no-repeat;
     color: theme('colors.ink');
     font-family: theme('fontFamily.sans');
   }

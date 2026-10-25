@@ -28,7 +28,7 @@ const IcProfile = (
 export default function TenantDashboard() {
   return (
     <div>
-      <div className="bg-sand-soft border border-line rounded-2xl p-8 sm:p-10">
+      <div className="relative overflow-hidden bg-gradient-to-br from-marigold-soft via-sand-soft to-teal-soft border border-line rounded-2xl p-8 sm:p-10">
         <div className="flex items-start justify-between gap-6 flex-wrap">
           <div className="max-w-lg">
             <p className="text-[10px] uppercase tracking-[0.24em] text-brand font-semibold">
@@ -44,7 +44,7 @@ export default function TenantDashboard() {
           </div>
           <Link
             to="/properties"
-            className="bg-brand text-white hover:bg-brand-dark px-6 py-3 rounded-full text-sm font-medium transition whitespace-nowrap"
+            className="bg-brand-gradient text-white hover:brightness-110 px-6 py-3 rounded-full text-sm font-medium transition whitespace-nowrap shadow-glow"
           >
             Browse properties
           </Link>
@@ -54,24 +54,28 @@ export default function TenantDashboard() {
       <div className="mt-8 grid gap-5 sm:grid-cols-2">
         <DashboardCard
           icon={IcSearch}
+          tone="brand"
           title="Browse Properties"
           description="Find flats, rooms and PGs available in your city."
           to="/properties"
         />
         <DashboardCard
           icon={IcUsers}
+          tone="teal"
           title="Find Roommates"
           description="Discover people you could share a place with."
           to="/roommates"
         />
         <DashboardCard
           icon={IcHeart}
+          tone="marigold"
           title="My Favorites"
           description="Properties you've saved to check out later."
           to="/favorites"
         />
         <DashboardCard
           icon={IcProfile}
+          tone="sage"
           title="My Roommate Profile"
           description="Tell others your preferences so they can match with you."
           to="/roommate-profile"

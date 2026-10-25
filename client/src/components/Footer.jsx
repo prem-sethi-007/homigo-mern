@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 export default function Footer() {
   return (
     <footer className="mt-auto bg-ink text-sand-soft">
+      <div className="h-1 bg-gradient-to-r from-brand via-marigold to-teal" />
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid gap-12 sm:grid-cols-4">
           <div className="sm:col-span-2 max-w-sm">
-            <p className="text-white font-display text-2xl flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-sm bg-brand" />
+            <p className="text-white font-display text-2xl flex items-center gap-2.5">
+              <span className="w-3 h-3 rounded-[4px] rotate-45 bg-gradient-to-br from-brand to-marigold" />
               HOMIGO
             </p>
             <p className="mt-4 text-sm text-sand-soft/70 leading-relaxed">
@@ -23,12 +24,12 @@ export default function Footer() {
             </p>
             <ul className="mt-5 space-y-3 text-sm">
               <li>
-                <Link to="/properties" className="hover:text-white transition">
+                <Link to="/properties" className="hover:text-marigold transition">
                   Browse Properties
                 </Link>
               </li>
               <li>
-                <Link to="/roommates" className="hover:text-white transition">
+                <Link to="/roommates" className="hover:text-marigold transition">
                   Find Roommates
                 </Link>
               </li>
@@ -41,12 +42,12 @@ export default function Footer() {
             </p>
             <ul className="mt-5 space-y-3 text-sm">
               <li>
-                <Link to="/register" className="hover:text-white transition">
+                <Link to="/register" className="hover:text-marigold transition">
                   Sign up
                 </Link>
               </li>
               <li>
-                <Link to="/login" className="hover:text-white transition">
+                <Link to="/login" className="hover:text-marigold transition">
                   Log in
                 </Link>
               </li>

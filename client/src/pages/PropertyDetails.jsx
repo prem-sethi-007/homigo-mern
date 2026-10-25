@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { propertyService } from '../services/propertyService';
+import { getFallbackImage } from '../utils/propertyImage';
 
 const TYPE_LABEL = { flat: 'Flat', room: 'Room', pg: 'PG' };
 const FURNISH_LABEL = {
@@ -14,28 +15,17 @@ function formatRent(n) {
   return `₹${n.toLocaleString('en-IN')}`;
 }
 
-function PlaceholderHero() {
-  return (
-    <div
-      className="w-full h-full flex items-center justify-center text-white/25"
-      style={{
-        background:
-          'linear-gradient(135deg, #995F2F 0%, #622B14 55%, #2B211B 100%)',
-      }}
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth="0.9"
-        stroke="currentColor"
-        className="w-32 h-32"
-      >
-        <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955a1.5 1.5 0 0 1 2.12 0L22.28 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125h4.125v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-      </svg>
-    </div>
-  );
-}
+const TYPE_BADGE = {
+  flat: 'bg-teal text-white',
+  room: 'bg-brand text-white',
+  pg: 'bg-marigold text-ink',
+};
+const AMENITY_TINTS = [
+  'bg-teal-soft text-teal-dark border-teal/20',
+  'bg-brand-soft text-brand-dark border-brand/20',
+  'bg-marigold-soft text-marigold-dark border-marigold/30',
+  'bg-sage-soft text-sage-dark border-sage/20',
+];
 
 export default function PropertyDetails() {
   const { id } = useParams();
@@ -119,6 +109,10 @@ function Detail({ property }) {
     owner,
   } = property;
 
+  const [imgFailed, setImgFailed] = useState(false);
+  const heroSrc =
+    !imgFailed && images[0] ? images[0] : getFallbackImage(property).hero;
+
   const metaBits = [
     type && TYPE_LABEL[type],
     typeof bedrooms === 'number' && bedrooms > 0 && `${bedrooms} BHK`,
@@ -128,15 +122,23 @@ function Detail({ property }) {
   return (
     <>
       {/* Hero image */}
-      <div className="rounded-3xl overflow-hidden bg-sand-soft aspect-[16/8]">
-        {images[0] ? (
-          <img
-            src={images[0]}
-            alt={title}
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <PlaceholderHero />
+      <div className="relative rounded-3xl overflow-hidden bg-sand-soft aspect-[16/8] shadow-lift">
+        <img
+          src={heroSrc}
+          alt={title}
+          onError={() => setImgFailed(true)}
+          className="w-full h-full object-cover"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-t from-ink/35 via-transparent to-transparent pointer-events-none"
+        />
+        {type && TYPE_LABEL[type] && (
+          <span
+            className={`absolute bottom-5 left-5 text-xs font-semibold uppercase tracking-[0.2em] px-4 py-2 rounded-full shadow-sm ${TYPE_BADGE[type]}`}
+          >
+            {TYPE_LABEL[type]}
+          </span>
         )}
       </div>
 
@@ -160,7 +162,7 @@ function Detail({ property }) {
           <p className="text-xs uppercase tracking-[0.2em] text-muted">
             Monthly rent
           </p>
-          <p className="mt-2 font-display text-4xl text-ink">
+          <p className="mt-2 font-display text-4xl text-brand">
             {formatRent(rent)}
             <span className="text-base text-muted"> /mo</span>
           </p>
@@ -196,10 +198,12 @@ function Detail({ property }) {
                 Amenities
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
-                {amenities.map((a) => (
+                {amenities.map((a, i) => (
                   <span
                     key={a}
-                    className="text-sm bg-white border border-line text-ink px-4 py-1.5 rounded-full"
+                    className={`text-sm border px-4 py-1.5 rounded-full ${
+                      AMENITY_TINTS[i % AMENITY_TINTS.length]
+                    }`}
                   >
                     {a}
                   </span>
@@ -217,7 +221,7 @@ function Detail({ property }) {
                 Listed by
               </p>
               <div className="mt-4 flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-brand-soft text-brand flex items-center justify-center font-semibold flex-shrink-0">
+                <div className="w-12 h-12 rounded-full bg-brand-gradient text-white flex items-center justify-center font-semibold flex-shrink-0 shadow-glow">
                   {(owner.name?.[0] || '?').toUpperCase()}
                 </div>
                 <div className="min-w-0">
@@ -235,7 +239,7 @@ function Detail({ property }) {
                   href={`mailto:${owner.email}?subject=${encodeURIComponent(
                     'Inquiry about ' + title
                   )}`}
-                  className="mt-6 block text-center bg-brand text-white hover:bg-brand-dark px-5 py-3 rounded-full text-sm font-medium transition"
+                  className="mt-6 block text-center bg-brand-gradient text-white hover:brightness-110 px-5 py-3 rounded-full text-sm font-medium transition shadow-glow"
                 >
                   Contact owner
                 </a>

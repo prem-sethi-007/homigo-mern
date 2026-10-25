@@ -1,8 +1,14 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { getFallbackImage } from '../utils/propertyImage';
 
 const TYPE_LABEL = { flat: 'Flat', room: 'Room', pg: 'PG' };
+const TYPE_BADGE = {
+  flat: 'bg-teal text-white',
+  room: 'bg-brand text-white',
+  pg: 'bg-marigold text-ink',
+};
 const FURNISH_LABEL = {
   furnished: 'Furnished',
   semi: 'Semi-furnished',
@@ -12,28 +18,6 @@ const FURNISH_LABEL = {
 function formatRent(n) {
   if (typeof n !== 'number') return '';
   return `₹${n.toLocaleString('en-IN')}`;
-}
-
-function Placeholder() {
-  return (
-    <div
-      className="w-full h-full flex items-center justify-center text-white/25"
-      style={{
-        background: 'linear-gradient(160deg, #995F2F 0%, #622B14 100%)',
-      }}
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth="1"
-        stroke="currentColor"
-        className="w-20 h-20"
-      >
-        <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955a1.5 1.5 0 0 1 2.12 0L22.28 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125h4.125v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-      </svg>
-    </div>
-  );
 }
 
 function HeartIcon({ filled }) {
@@ -59,6 +43,7 @@ export default function PropertyCard({ property }) {
   const { user, isFavorited, toggleFavorite } = useAuth();
   const navigate = useNavigate();
   const [pending, setPending] = useState(false);
+  const [imgFailed, setImgFailed] = useState(false);
 
   const {
     _id,
@@ -74,6 +59,8 @@ export default function PropertyCard({ property }) {
   } = property;
 
   const favorited = user ? isFavorited(_id) : false;
+  const ownImage = !imgFailed && images && images[0] ? images[0] : null;
+  const imageSrc = ownImage || getFallbackImage(property).card;
 
   async function handleHeart(e) {
     e.preventDefault();
@@ -99,7 +86,6 @@ export default function PropertyCard({ property }) {
     : 'Save to favorites';
 
   const metaBits = [
-    type && TYPE_LABEL[type],
     typeof bedrooms === 'number' && bedrooms > 0 && `${bedrooms} BHK`,
     furnishing && FURNISH_LABEL[furnishing],
   ].filter(Boolean);
@@ -107,21 +93,26 @@ export default function PropertyCard({ property }) {
   return (
     <Link to={`/properties/${_id}`} className="block group">
       {/* Image */}
-      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-sand-soft">
-        {images && images[0] ? (
-          <img
-            src={images[0]}
-            alt={title}
-            className="absolute inset-0 w-full h-full object-cover transition duration-500 group-hover:scale-105"
-          />
-        ) : (
-          <Placeholder />
-        )}
+      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-sand-soft shadow-sm transition duration-300 group-hover:-translate-y-1 group-hover:shadow-lift">
+        <img
+          src={imageSrc}
+          alt={title}
+          loading="lazy"
+          onError={() => setImgFailed(true)}
+          className="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-105"
+        />
+
+        {/* Bottom fade so the type badge stays legible on any photo */}
+        <div
+          aria-hidden
+          className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink/55 to-transparent pointer-events-none"
+        />
 
         {/* Availability badge */}
         <div className="absolute top-4 left-4">
           {available !== false ? (
-            <span className="text-[10px] font-semibold uppercase tracking-[0.2em] bg-white/95 text-ink px-3 py-1.5 rounded-full">
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] bg-white/95 text-sage-dark px-3 py-1.5 rounded-full shadow-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-sage" />
               Available
             </span>
           ) : (
@@ -139,27 +130,36 @@ export default function PropertyCard({ property }) {
           aria-label={heartTitle}
           title={heartTitle}
           className={
-            'absolute top-4 right-4 w-10 h-10 rounded-full bg-white/95 hover:bg-white shadow-sm flex items-center justify-center disabled:opacity-60 transition ' +
-            (favorited ? 'text-brand' : 'text-muted-soft')
+            'absolute top-4 right-4 w-10 h-10 rounded-full bg-white/95 hover:bg-white hover:scale-110 shadow-sm flex items-center justify-center disabled:opacity-60 transition ' +
+            (favorited ? 'text-brand' : 'text-muted-soft hover:text-brand')
           }
         >
           <HeartIcon filled={favorited} />
         </button>
+
+        {/* Type badge */}
+        {type && TYPE_LABEL[type] && (
+          <span
+            className={`absolute bottom-4 left-4 text-[10px] font-semibold uppercase tracking-[0.2em] px-3 py-1.5 rounded-full shadow-sm ${TYPE_BADGE[type]}`}
+          >
+            {TYPE_LABEL[type]}
+          </span>
+        )}
       </div>
 
       {/* Details */}
       <div className="mt-4 px-1">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
-            <p className="text-[11px] uppercase tracking-[0.2em] text-muted-soft">
+            <p className="text-[11px] uppercase tracking-[0.2em] text-teal-dark font-medium">
               {city || 'Location'}
             </p>
-            <h3 className="mt-1 font-display text-xl text-ink line-clamp-1 leading-snug">
+            <h3 className="mt-1 font-display text-xl text-ink line-clamp-1 leading-snug group-hover:text-brand transition">
               {title}
             </h3>
           </div>
           <p className="text-right whitespace-nowrap">
-            <span className="font-display text-xl text-ink">
+            <span className="font-display text-xl text-brand">
               {formatRent(rent)}
             </span>
             <span className="text-xs text-muted"> /mo</span>

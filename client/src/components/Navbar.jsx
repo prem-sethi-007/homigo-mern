@@ -3,10 +3,10 @@ import { useAuth } from '../context/AuthContext';
 
 function navClass({ isActive }) {
   return (
-    'text-sm tracking-wide transition ' +
+    'text-sm tracking-wide transition pb-1 border-b-2 ' +
     (isActive
-      ? 'text-ink font-semibold'
-      : 'text-muted hover:text-ink')
+      ? 'text-brand font-semibold border-brand'
+      : 'text-muted hover:text-ink border-transparent')
   );
 }
 
@@ -25,9 +25,9 @@ export default function Navbar() {
         {/* Brand */}
         <Link
           to="/"
-          className="flex items-center gap-2 text-lg font-semibold tracking-tight text-ink"
+          className="flex items-center gap-2.5 text-lg font-semibold tracking-tight text-ink"
         >
-          <span className="w-2.5 h-2.5 rounded-sm bg-brand" />
+          <span className="w-3 h-3 rounded-[4px] rotate-45 bg-gradient-to-br from-brand to-marigold shadow-glow" />
           HOMIGO
         </Link>
 
@@ -53,20 +53,12 @@ export default function Navbar() {
               <span className="text-sm text-muted hidden lg:inline">
                 {user.name}
               </span>
-              <NavLink
-                to="/dashboard"
-                className={({ isActive }) =>
-                  'text-sm tracking-wide transition ' +
-                  (isActive
-                    ? 'text-ink font-semibold'
-                    : 'text-muted hover:text-ink')
-                }
-              >
+              <NavLink to="/dashboard" className={navClass}>
                 Dashboard
               </NavLink>
               <button
                 onClick={handleLogout}
-                className="text-sm font-medium bg-white border border-line hover:border-brand/40 text-ink px-4 py-1.5 rounded-full transition"
+                className="text-sm font-medium bg-white border border-line hover:border-brand/40 hover:text-brand text-ink px-4 py-1.5 rounded-full transition"
               >
                 Log out
               </button>
@@ -75,13 +67,13 @@ export default function Navbar() {
             <>
               <NavLink
                 to="/login"
-                className="text-sm text-muted hover:text-ink transition hidden sm:inline"
+                className="text-sm text-muted hover:text-brand transition hidden sm:inline"
               >
                 Log in
               </NavLink>
               <Link
                 to="/register"
-                className="text-sm font-medium bg-brand text-white hover:bg-brand-dark px-5 py-2 rounded-full transition"
+                className="text-sm font-medium bg-brand-gradient text-white hover:brightness-110 px-5 py-2 rounded-full transition shadow-glow"
               >
                 Sign up
               </Link>

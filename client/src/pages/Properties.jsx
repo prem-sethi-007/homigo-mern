@@ -71,29 +71,45 @@ export default function Properties() {
   return (
     <div className="max-w-7xl mx-auto px-6 pt-16 pb-24">
       {/* Header */}
-      <div className="flex items-end justify-between flex-wrap gap-6 border-b border-line pb-8">
-        <div>
-          <p className="text-xs uppercase tracking-[0.24em] text-brand font-semibold">
-            Homes
-          </p>
-          <h1 className="mt-3 font-display text-5xl sm:text-6xl leading-[1.02] tracking-tight text-ink">
-            Browse the marketplace.
-          </h1>
-          <p className="mt-4 text-muted max-w-xl">
-            Flats, private rooms and PGs across cities — filter by budget or
-            type, tap the heart to save.
-          </p>
+      <div className="relative overflow-hidden rounded-3xl border border-line bg-gradient-to-br from-marigold-soft via-ivory to-teal-soft p-8 sm:p-12">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-20 -right-16 h-64 w-64 rounded-full bg-brand/15 blur-3xl"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -bottom-24 left-1/4 h-64 w-64 rounded-full bg-teal/15 blur-3xl"
+        />
+        <div className="relative flex items-end justify-between flex-wrap gap-6">
+          <div>
+            <p className="text-xs uppercase tracking-[0.24em] text-brand font-semibold">
+              Homes
+            </p>
+            <h1 className="mt-3 font-display text-5xl sm:text-6xl leading-[1.02] tracking-tight text-ink">
+              Browse the{' '}
+              <span className="italic bg-gradient-to-r from-brand to-[#E8862A] bg-clip-text text-transparent pr-1">
+                marketplace.
+              </span>
+            </h1>
+            <p className="mt-4 text-muted max-w-xl">
+              Flats, private rooms and PGs across cities — filter by budget or
+              type, tap the heart to save.
+            </p>
+          </div>
+          {state.status === 'success' && (
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal-dark bg-white/80 border border-teal/20 px-4 py-2 rounded-full">
+              {state.properties.length} listing
+              {state.properties.length === 1 ? '' : 's'}
+            </p>
+          )}
         </div>
-        {state.status === 'success' && (
-          <p className="text-xs uppercase tracking-[0.2em] text-muted">
-            {state.properties.length} listing
-            {state.properties.length === 1 ? '' : 's'}
-          </p>
-        )}
       </div>
 
       {/* Filters */}
-      <form onSubmit={handleSubmit} className="mt-8">
+      <form
+        onSubmit={handleSubmit}
+        className="mt-8 bg-white border border-line rounded-2xl p-5 shadow-sm"
+      >
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">
             <Field
@@ -149,7 +165,7 @@ export default function Properties() {
           </button>
           <button
             type="submit"
-            className="text-sm font-medium bg-brand text-white hover:bg-brand-dark px-6 py-2.5 rounded-full transition"
+            className="text-sm font-medium bg-brand-gradient text-white hover:brightness-110 px-6 py-2.5 rounded-full transition shadow-glow"
           >
             Apply filters
           </button>
@@ -258,7 +274,7 @@ function Field({ label, ...props }) {
 
 function Chip({ children }) {
   return (
-    <span className="text-xs font-medium bg-sand-soft text-ink px-3 py-1.5 rounded-full">
+    <span className="text-xs font-medium bg-teal-soft text-teal-dark px-3 py-1.5 rounded-full">
       {children}
     </span>
   );

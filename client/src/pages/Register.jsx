@@ -52,7 +52,7 @@ export default function Register() {
 
       <form
         onSubmit={handleSubmit}
-        className="mt-10 bg-white border border-line rounded-2xl p-8 space-y-5 shadow-sm"
+        className="mt-10 bg-white border border-line border-t-4 border-t-brand rounded-2xl p-8 space-y-5 shadow-lift"
       >
         <FormField
           label="Name"
@@ -113,7 +113,7 @@ export default function Register() {
         <button
           type="submit"
           disabled={submitting}
-          className="w-full bg-brand text-white hover:bg-brand-dark rounded-full py-3 font-medium disabled:opacity-50 transition shadow-sm"
+          className="w-full bg-brand-gradient text-white hover:brightness-110 rounded-full py-3 font-medium disabled:opacity-50 transition shadow-glow"
         >
           {submitting ? 'Creating account…' : 'Create account'}
         </button>
