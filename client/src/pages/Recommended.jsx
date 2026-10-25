@@ -80,7 +80,7 @@ export default function Recommended() {
         )}
 
         {state.status === 'success' && state.needsProfile && (
-          <div className="border border-line rounded-2xl p-14 text-center bg-sand-soft/40">
+          <div className="border border-line rounded-2xl p-14 text-center bg-cream-soft/40">
             <p className="text-xs uppercase tracking-[0.24em] text-brand font-semibold">
               Set up first
             </p>

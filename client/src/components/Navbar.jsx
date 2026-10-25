@@ -27,7 +27,7 @@ export default function Navbar() {
           to="/"
           className="flex items-center gap-2.5 text-lg font-semibold tracking-tight text-ink"
         >
-          <span className="w-3 h-3 rounded-[4px] rotate-45 bg-gradient-to-br from-brand to-marigold shadow-glow" />
+          <span className="w-3 h-3 rounded-[4px] rotate-45 bg-gradient-to-br from-brand to-navy shadow-glow" />
           HOMIGO
         </Link>
 

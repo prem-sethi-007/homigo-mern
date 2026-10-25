@@ -28,7 +28,7 @@ const IcProfile = (
 export default function TenantDashboard() {
   return (
     <div>
-      <div className="relative overflow-hidden bg-gradient-to-br from-marigold-soft via-sand-soft to-teal-soft border border-line rounded-2xl p-8 sm:p-10">
+      <div className="relative overflow-hidden bg-gradient-to-br from-cream via-cream-soft to-navy-soft border border-line rounded-2xl p-8 sm:p-10">
         <div className="flex items-start justify-between gap-6 flex-wrap">
           <div className="max-w-lg">
             <p className="text-[10px] uppercase tracking-[0.24em] text-brand font-semibold">
@@ -61,14 +61,14 @@ export default function TenantDashboard() {
         />
         <DashboardCard
           icon={IcUsers}
-          tone="teal"
+          tone="navy"
           title="Find Roommates"
           description="Discover people you could share a place with."
           to="/roommates"
         />
         <DashboardCard
           icon={IcHeart}
-          tone="marigold"
+          tone="solid"
           title="My Favorites"
           description="Properties you've saved to check out later."
           to="/favorites"

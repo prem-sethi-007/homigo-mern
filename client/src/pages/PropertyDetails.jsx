@@ -16,15 +16,15 @@ function formatRent(n) {
 }
 
 const TYPE_BADGE = {
-  flat: 'bg-teal text-white',
+  flat: 'bg-navy text-white',
   room: 'bg-brand text-white',
-  pg: 'bg-marigold text-ink',
+  pg: 'bg-sage text-ink',
 };
 const AMENITY_TINTS = [
-  'bg-teal-soft text-teal-dark border-teal/20',
+  'bg-navy-soft text-navy border-navy/20',
   'bg-brand-soft text-brand-dark border-brand/20',
-  'bg-marigold-soft text-marigold-dark border-marigold/30',
-  'bg-sage-soft text-sage-dark border-sage/20',
+  'bg-sage-soft text-sage-dark border-sage-dark/30',
+  'bg-white text-ink border-line',
 ];
 
 export default function PropertyDetails() {
@@ -122,7 +122,7 @@ function Detail({ property }) {
   return (
     <>
       {/* Hero image */}
-      <div className="relative rounded-3xl overflow-hidden bg-sand-soft aspect-[16/8] shadow-lift">
+      <div className="relative rounded-3xl overflow-hidden bg-cream-soft aspect-[16/8] shadow-lift">
         <img
           src={heroSrc}
           alt={title}
@@ -171,7 +171,7 @@ function Detail({ property }) {
               Available
             </span>
           ) : (
-            <span className="inline-block mt-4 text-[10px] font-semibold uppercase tracking-[0.2em] bg-sand-soft text-muted px-3 py-1.5 rounded-full">
+            <span className="inline-block mt-4 text-[10px] font-semibold uppercase tracking-[0.2em] bg-cream-soft text-muted px-3 py-1.5 rounded-full">
               Not available
             </span>
           )}
@@ -246,7 +246,7 @@ function Detail({ property }) {
               ) : (
                 <button
                   disabled
-                  className="mt-6 w-full text-center bg-sand text-muted px-5 py-3 rounded-full text-sm font-medium cursor-not-allowed"
+                  className="mt-6 w-full text-center bg-cream text-muted px-5 py-3 rounded-full text-sm font-medium cursor-not-allowed"
                 >
                   Contact info unavailable
                 </button>

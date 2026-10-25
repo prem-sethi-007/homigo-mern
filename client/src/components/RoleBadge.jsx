@@ -1,6 +1,6 @@
 export default function RoleBadge({ role }) {
   const styles = {
-    tenant: 'bg-teal-soft text-teal-dark',
+    tenant: 'bg-navy-soft text-navy',
     owner: 'bg-brand-soft text-brand-dark',
   };
   const label = role === 'owner' ? 'Owner' : 'Tenant';

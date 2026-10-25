@@ -29,16 +29,16 @@ function formatBudget(min, max) {
 }
 
 function scoreBg(score) {
-  if (score >= 80) return 'bg-sage text-white';
-  if (score >= 60) return 'bg-teal text-white';
-  return 'bg-marigold-soft text-marigold-dark';
+  if (score >= 80) return 'bg-navy text-white';
+  if (score >= 60) return 'bg-brand text-white';
+  return 'bg-sage-soft text-sage-dark';
 }
 
 const AVATAR_BG = [
-  'bg-gradient-to-br from-brand to-[#F08A2C]',
-  'bg-gradient-to-br from-teal-dark to-teal',
-  'bg-gradient-to-br from-[#F2784B] to-marigold',
-  'bg-gradient-to-br from-sage to-teal',
+  'bg-gradient-to-br from-brand-dark to-[#A5703F]',
+  'bg-gradient-to-br from-navy-dark to-navy-light',
+  'bg-gradient-to-br from-sage-dark to-[#8A8E70]',
+  'bg-gradient-to-br from-brand to-navy',
 ];
 
 function avatarBg(name) {
@@ -158,7 +158,7 @@ export default function RoommateCard({ profile, match }) {
               key={r}
               className="text-xs text-sage-dark flex items-start gap-2"
             >
-              <span className="mt-1.5 w-1 h-1 rounded-full bg-sage flex-shrink-0" />
+              <span className="mt-1.5 w-1 h-1 rounded-full bg-sage-dark flex-shrink-0" />
               {r}
             </p>
           ))}

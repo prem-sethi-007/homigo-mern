@@ -5,9 +5,9 @@ import { getFallbackImage } from '../utils/propertyImage';
 
 const TYPE_LABEL = { flat: 'Flat', room: 'Room', pg: 'PG' };
 const TYPE_BADGE = {
-  flat: 'bg-teal text-white',
+  flat: 'bg-navy text-white',
   room: 'bg-brand text-white',
-  pg: 'bg-marigold text-ink',
+  pg: 'bg-sage text-ink',
 };
 const FURNISH_LABEL = {
   furnished: 'Furnished',
@@ -93,7 +93,7 @@ export default function PropertyCard({ property }) {
   return (
     <Link to={`/properties/${_id}`} className="block group">
       {/* Image */}
-      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-sand-soft shadow-sm transition duration-300 group-hover:-translate-y-1 group-hover:shadow-lift">
+      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-cream-soft shadow-sm transition duration-300 group-hover:-translate-y-1 group-hover:shadow-lift">
         <img
           src={imageSrc}
           alt={title}
@@ -112,7 +112,7 @@ export default function PropertyCard({ property }) {
         <div className="absolute top-4 left-4">
           {available !== false ? (
             <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] bg-white/95 text-sage-dark px-3 py-1.5 rounded-full shadow-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-sage" />
+              <span className="w-1.5 h-1.5 rounded-full bg-sage-dark" />
               Available
             </span>
           ) : (
@@ -151,7 +151,7 @@ export default function PropertyCard({ property }) {
       <div className="mt-4 px-1">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
-            <p className="text-[11px] uppercase tracking-[0.2em] text-teal-dark font-medium">
+            <p className="text-[11px] uppercase tracking-[0.2em] text-navy font-medium">
               {city || 'Location'}
             </p>
             <h3 className="mt-1 font-display text-xl text-ink line-clamp-1 leading-snug group-hover:text-brand transition">

@@ -2,16 +2,16 @@ import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
-    <footer className="mt-auto bg-ink text-sand-soft">
-      <div className="h-1 bg-gradient-to-r from-brand via-marigold to-teal" />
+    <footer className="mt-auto bg-ink text-cream-soft">
+      <div className="h-1 bg-gradient-to-r from-brand via-cream to-sage" />
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="grid gap-12 sm:grid-cols-4">
           <div className="sm:col-span-2 max-w-sm">
             <p className="text-white font-display text-2xl flex items-center gap-2.5">
-              <span className="w-3 h-3 rounded-[4px] rotate-45 bg-gradient-to-br from-brand to-marigold" />
+              <span className="w-3 h-3 rounded-[4px] rotate-45 bg-gradient-to-br from-brand to-cream" />
               HOMIGO
             </p>
-            <p className="mt-4 text-sm text-sand-soft/70 leading-relaxed">
+            <p className="mt-4 text-sm text-cream-soft/70 leading-relaxed">
               A city-based accommodation platform for students and working
               professionals — find flats, rooms, and the right people to live
               with.
@@ -24,12 +24,12 @@ export default function Footer() {
             </p>
             <ul className="mt-5 space-y-3 text-sm">
               <li>
-                <Link to="/properties" className="hover:text-marigold transition">
+                <Link to="/properties" className="hover:text-cream transition">
                   Browse Properties
                 </Link>
               </li>
               <li>
-                <Link to="/roommates" className="hover:text-marigold transition">
+                <Link to="/roommates" className="hover:text-cream transition">
                   Find Roommates
                 </Link>
               </li>
@@ -42,12 +42,12 @@ export default function Footer() {
             </p>
             <ul className="mt-5 space-y-3 text-sm">
               <li>
-                <Link to="/register" className="hover:text-marigold transition">
+                <Link to="/register" className="hover:text-cream transition">
                   Sign up
                 </Link>
               </li>
               <li>
-                <Link to="/login" className="hover:text-marigold transition">
+                <Link to="/login" className="hover:text-cream transition">
                   Log in
                 </Link>
               </li>
@@ -55,7 +55,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs text-sand-soft/50 tracking-wide">
+        <div className="mt-14 pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs text-cream-soft/50 tracking-wide">
           <p>HOMIGO — a MERN college project · 2026</p>
           <p>Find your home. Find your people.</p>
         </div>

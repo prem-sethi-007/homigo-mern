@@ -1,45 +1,43 @@
 /** @type {import('tailwindcss').Config} */
+// Brand palette: navy #0A2947, cream #F3E4C9, sage #D3D4C0, brown #8B5E3C.
+// The "dark / soft / light" variants are tints and shades of those four.
 export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
     extend: {
       colors: {
         brand: {
-          DEFAULT: '#CC4A14', // Terracotta - primary actions, accents
-          dark: '#A53A0E',    // Deep terracotta - hover / pressed
-          soft: '#FDE6D6',    // Peach tint - icon backdrops
+          DEFAULT: '#8B5E3C', // Brown - primary actions, accents
+          dark: '#6B4529',    // Deep brown - hover / pressed
+          soft: '#F3E4C9',    // Cream - icon backdrops
         },
-        teal: {
-          DEFAULT: '#0E8F98', // Fresh teal - secondary accent
-          dark: '#0A6B72',    // Text on soft teal
-          soft: '#D5F0F2',    // Teal tint
+        navy: {
+          DEFAULT: '#0A2947', // Navy - text, dark surfaces, secondary accent
+          dark: '#061A30',    // Deepest navy - gradients
+          light: '#16466F',   // Lighter navy - gradients
+          soft: '#E1E7EE',    // Navy tint - chips, backdrops
         },
-        marigold: {
-          DEFAULT: '#F4A62A', // Sunny highlight
-          dark: '#8F5800',    // Text on soft marigold
-          soft: '#FFEFC9',    // Marigold tint
+        cream: {
+          DEFAULT: '#F3E4C9', // Cream - warm panels
+          soft: '#FAF3E5',    // Lighter cream
         },
-        sand: {
-          DEFAULT: '#F3D9A4', // Warm cream
-          soft: '#FBEFD8',    // Lighter cream
-        },
-        ivory: '#FFFAF2',     // Warm page background
-        ink: '#2B211B',       // Dark text
+        ivory: '#FBF6EC',     // Page background (very light cream)
+        ink: '#0A2947',       // Text (navy)
         muted: {
-          DEFAULT: '#6F6355', // Warm secondary text
-          soft: '#8C816C',    // Warm tertiary text
+          DEFAULT: '#51667D', // Secondary text (navy-grey)
+          soft: '#6B7C8E',    // Tertiary text
         },
         sage: {
-          DEFAULT: '#238A5A', // Green - success / strong match
-          dark: '#1B6B47',    // Text on soft green
-          soft: '#DAF2E5',    // Green tint
+          DEFAULT: '#D3D4C0', // Sage - borders, soft surfaces
+          dark: '#6E7259',    // Sage text / dots / accents
+          soft: '#E9EADB',    // Sage tint
         },
         error: {
           DEFAULT: '#B0413A',
           dark: '#8A2F2A',
           soft: '#F3D9D6',
         },
-        line: '#EBDFCB',      // Warm border
+        line: '#D3D4C0',      // Borders (sage)
       },
       fontFamily: {
         sans: [
@@ -55,13 +53,13 @@ export default {
       },
       backgroundImage: {
         'brand-gradient':
-          'linear-gradient(135deg, #CC4A14 0%, #E2622A 55%, #F08A2C 100%)',
-        'teal-gradient': 'linear-gradient(135deg, #0A6B72 0%, #0E8F98 100%)',
-        'sun-gradient': 'linear-gradient(135deg, #F4A62A 0%, #F2784B 100%)',
+          'linear-gradient(135deg, #6B4529 0%, #8B5E3C 55%, #A5703F 100%)',
+        'navy-gradient':
+          'linear-gradient(135deg, #061A30 0%, #0A2947 55%, #16466F 100%)',
       },
       boxShadow: {
-        glow: '0 10px 28px -10px rgba(204, 74, 20, 0.55)',
-        lift: '0 18px 40px -18px rgba(43, 33, 27, 0.35)',
+        glow: '0 10px 28px -10px rgba(139, 94, 60, 0.6)',
+        lift: '0 18px 40px -18px rgba(10, 41, 71, 0.4)',
       },
     },
   },

@@ -6,17 +6,17 @@ const TONES = {
     icon: 'bg-brand-soft text-brand',
     hover: 'hover:border-brand/40',
   },
-  teal: {
-    icon: 'bg-teal-soft text-teal-dark',
-    hover: 'hover:border-teal/40',
-  },
-  marigold: {
-    icon: 'bg-marigold-soft text-marigold-dark',
-    hover: 'hover:border-marigold/50',
+  navy: {
+    icon: 'bg-navy-soft text-navy',
+    hover: 'hover:border-navy/40',
   },
   sage: {
     icon: 'bg-sage-soft text-sage-dark',
-    hover: 'hover:border-sage/40',
+    hover: 'hover:border-sage-dark/40',
+  },
+  solid: {
+    icon: 'bg-navy text-cream',
+    hover: 'hover:border-navy/40',
   },
 };
 
@@ -49,7 +49,7 @@ export default function DashboardCard({
         <div className="flex items-center justify-between gap-2">
           <h3 className="font-display text-lg text-ink">{title}</h3>
           {comingSoon && (
-            <span className="text-[10px] uppercase tracking-[0.2em] text-marigold-dark bg-marigold-soft px-2 py-0.5 rounded-full">
+            <span className="text-[10px] uppercase tracking-[0.2em] text-sage-dark bg-sage-soft px-2 py-0.5 rounded-full">
               Soon
             </span>
           )}

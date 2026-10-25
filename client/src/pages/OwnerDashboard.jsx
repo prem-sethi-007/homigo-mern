@@ -23,7 +23,7 @@ export default function OwnerDashboard() {
   return (
     <div>
       {/* Colourful welcome banner */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-marigold-soft via-sand-soft to-teal-soft border border-line rounded-2xl p-8 sm:p-10">
+      <div className="relative overflow-hidden bg-gradient-to-br from-cream via-cream-soft to-navy-soft border border-line rounded-2xl p-8 sm:p-10">
         <div className="flex items-start justify-between gap-6 flex-wrap">
           <div className="max-w-lg">
             <p className="text-[10px] uppercase tracking-[0.24em] text-brand font-semibold">
@@ -56,14 +56,14 @@ export default function OwnerDashboard() {
         />
         <DashboardCard
           icon={IcList}
-          tone="teal"
+          tone="navy"
           title="My Listings"
           description="Manage the properties you've posted so far."
           to="/properties/mine"
         />
         <DashboardCard
           icon={IcChart}
-          tone="marigold"
+          tone="sage"
           title="Listing Insights"
           description="See how many people are viewing and saving your properties."
           comingSoon

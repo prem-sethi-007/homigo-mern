@@ -229,7 +229,7 @@ function Detail({ profile }) {
             ) : (
               <button
                 disabled
-                className="mt-5 w-full text-center bg-sand text-muted px-5 py-3 rounded-full text-sm font-medium cursor-not-allowed"
+                className="mt-5 w-full text-center bg-cream text-muted px-5 py-3 rounded-full text-sm font-medium cursor-not-allowed"
               >
                 Contact info unavailable
               </button>

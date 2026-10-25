@@ -71,14 +71,14 @@ export default function Properties() {
   return (
     <div className="max-w-7xl mx-auto px-6 pt-16 pb-24">
       {/* Header */}
-      <div className="relative overflow-hidden rounded-3xl border border-line bg-gradient-to-br from-marigold-soft via-ivory to-teal-soft p-8 sm:p-12">
+      <div className="relative overflow-hidden rounded-3xl border border-line bg-gradient-to-br from-cream via-ivory to-sage-soft p-8 sm:p-12">
         <div
           aria-hidden
           className="pointer-events-none absolute -top-20 -right-16 h-64 w-64 rounded-full bg-brand/15 blur-3xl"
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute -bottom-24 left-1/4 h-64 w-64 rounded-full bg-teal/15 blur-3xl"
+          className="pointer-events-none absolute -bottom-24 left-1/4 h-64 w-64 rounded-full bg-white/60 blur-3xl"
         />
         <div className="relative flex items-end justify-between flex-wrap gap-6">
           <div>
@@ -87,7 +87,7 @@ export default function Properties() {
             </p>
             <h1 className="mt-3 font-display text-5xl sm:text-6xl leading-[1.02] tracking-tight text-ink">
               Browse the{' '}
-              <span className="italic bg-gradient-to-r from-brand to-[#E8862A] bg-clip-text text-transparent pr-1">
+              <span className="italic bg-gradient-to-r from-brand-dark to-[#A5703F] bg-clip-text text-transparent pr-1">
                 marketplace.
               </span>
             </h1>
@@ -97,7 +97,7 @@ export default function Properties() {
             </p>
           </div>
           {state.status === 'success' && (
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal-dark bg-white/80 border border-teal/20 px-4 py-2 rounded-full">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-navy bg-white/80 border border-navy/20 px-4 py-2 rounded-full">
               {state.properties.length} listing
               {state.properties.length === 1 ? '' : 's'}
             </p>
@@ -274,7 +274,7 @@ function Field({ label, ...props }) {
 
 function Chip({ children }) {
   return (
-    <span className="text-xs font-medium bg-teal-soft text-teal-dark px-3 py-1.5 rounded-full">
+    <span className="text-xs font-medium bg-navy-soft text-navy px-3 py-1.5 rounded-full">
       {children}
     </span>
   );
@@ -285,11 +285,11 @@ function LoadingGrid() {
     <div className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
       {[0, 1, 2, 3, 4, 5].map((i) => (
         <div key={i}>
-          <div className="aspect-[4/5] bg-sand-soft rounded-2xl animate-pulse" />
+          <div className="aspect-[4/5] bg-cream-soft rounded-2xl animate-pulse" />
           <div className="mt-4 px-1 space-y-3">
-            <div className="h-3 bg-sand-soft rounded animate-pulse w-1/3" />
-            <div className="h-5 bg-sand-soft rounded animate-pulse w-3/4" />
-            <div className="h-3 bg-sand-soft rounded animate-pulse w-1/2" />
+            <div className="h-3 bg-cream-soft rounded animate-pulse w-1/3" />
+            <div className="h-5 bg-cream-soft rounded animate-pulse w-3/4" />
+            <div className="h-3 bg-cream-soft rounded animate-pulse w-1/2" />
           </div>
         </div>
       ))}
