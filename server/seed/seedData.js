@@ -14,6 +14,7 @@ const dotenv = require('dotenv');
 dotenv.config({ path: path.join(__dirname, '..', '.env') });
 
 const mongoose = require('mongoose');
+const connectDB = require('../config/db');
 const User = require('../models/User');
 const Property = require('../models/Property');
 const RoommateProfile = require('../models/RoommateProfile');
@@ -209,16 +210,10 @@ const ROOMMATE_PROFILES = [
 ];
 
 async function run() {
-  const uri = process.env.MONGO_URI;
-  if (!uri) {
-    console.error('MONGO_URI is not defined in .env');
-    process.exit(1);
-  }
   const resetOnly = process.argv.includes('--reset');
 
   try {
-    await mongoose.connect(uri);
-    console.log('MongoDB connected');
+    await connectDB();
 
     console.log(`Clearing previous demo data (users with email @${DEMO_DOMAIN})...`);
     const cleared = await clearDemoData();

@@ -15,8 +15,6 @@ if (!process.env.JWT_SECRET) {
   process.exit(1);
 }
 
-connectDB();
-
 const app = express();
 
 // CORS: always allow local dev origins, plus any origins listed in
@@ -64,6 +62,14 @@ app.use('/api/roommates', roommateRoutes);
 const PORT = process.env.PORT || 5000;
 const HOST = '0.0.0.0';
 
-app.listen(PORT, HOST, () => {
-  console.log(`Homigo server listening on port ${PORT}`);
-});
+// Only start accepting requests once the database is reachable.
+connectDB()
+  .then(() => {
+    app.listen(PORT, HOST, () => {
+      console.log(`Homigo server listening on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error('MongoDB connection failed:', err.message);
+    process.exit(1);
+  });
