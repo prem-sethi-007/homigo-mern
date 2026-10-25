@@ -77,7 +77,7 @@ export default function Home() {
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-clip">
         {/* Warm-to-cool gradient with colour blobs */}
         <div
           aria-hidden
@@ -244,7 +244,7 @@ export default function Home() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="relative overflow-hidden border-t border-line bg-gradient-to-b from-cream-soft via-ivory to-sage-soft">
+      <section className="relative overflow-clip border-t border-line bg-gradient-to-b from-cream-soft via-ivory to-sage-soft">
         <div
           aria-hidden
           className="pointer-events-none absolute -top-20 right-0 h-72 w-72 rounded-full bg-brand/15 blur-3xl"
@@ -287,7 +287,7 @@ export default function Home() {
       <section className="bg-ivory">
         <div className="max-w-6xl mx-auto px-6 py-24">
           <div
-            className="relative overflow-hidden rounded-3xl px-8 py-16 sm:px-16 sm:py-20 text-center text-white shadow-lift"
+            className="relative overflow-clip rounded-3xl px-8 py-16 sm:px-16 sm:py-20 text-center text-white shadow-lift"
             style={{
               background:
                 'linear-gradient(120deg, #061A30 0%, #0A2947 55%, #16466F 100%)',

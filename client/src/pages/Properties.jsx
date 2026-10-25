@@ -71,7 +71,7 @@ export default function Properties() {
   return (
     <div className="max-w-7xl mx-auto px-6 pt-16 pb-24">
       {/* Header */}
-      <div className="relative overflow-hidden rounded-3xl border border-line bg-gradient-to-br from-cream via-ivory to-sage-soft p-8 sm:p-12">
+      <div className="relative overflow-clip rounded-3xl border border-line bg-gradient-to-br from-cream via-ivory to-sage-soft p-8 sm:p-12">
         <div
           aria-hidden
           className="pointer-events-none absolute -top-20 -right-16 h-64 w-64 rounded-full bg-brand/15 blur-3xl"

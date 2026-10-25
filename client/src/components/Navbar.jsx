@@ -3,10 +3,13 @@ import { useAuth } from '../context/AuthContext';
 
 function navClass({ isActive }) {
   return (
-    'text-sm tracking-wide transition pb-1 border-b-2 ' +
+    // The active underline is a text-decoration so it never changes the
+    // link's box height (padding/borders pushed the text off the baseline
+    // of its neighbours).
+    'text-sm tracking-wide transition ' +
     (isActive
-      ? 'text-brand font-semibold border-brand'
-      : 'text-muted hover:text-ink border-transparent')
+      ? 'text-brand font-semibold underline decoration-2 underline-offset-[10px]'
+      : 'text-muted hover:text-ink')
   );
 }
 
