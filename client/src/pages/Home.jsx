@@ -1,5 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import propertyImg from '../assets/home/property.jpg';
+import roommatesImg from '../assets/home/roommates.jpg';
+import handshakeImg from '../assets/home/handshake.jpg';
 
 const CITIES = [
   'Bengaluru',
@@ -166,16 +169,25 @@ export default function Home() {
               n="01"
               title="Discover properties"
               body="Search flats, private rooms and PGs across your city — filtered by rent, type and amenities. Owner-verified listings only."
+              image={propertyImg}
+              alt="Sunlit apartment building with balconies against a teal sky"
+              position="50% 40%"
             />
             <FeatureBlock
               n="02"
               title="Meet compatible roommates"
               body="Post a small profile and see who shares your budget, schedule and lifestyle. We rank matches — we never hide people."
+              image={roommatesImg}
+              alt="Two smiling roommates taking a selfie among moving boxes"
+              position="50% 55%"
             />
             <FeatureBlock
               n="03"
               title="Talk directly"
               body="Reach out over email once you've found the right fit. No middlemen, no bidding, no drama."
+              image={handshakeImg}
+              alt="Two people shaking hands"
+              position="62% 50%"
             />
           </div>
         </div>
@@ -253,10 +265,23 @@ export default function Home() {
   );
 }
 
-function FeatureBlock({ n, title, body }) {
+function FeatureBlock({ n, title, body, image, alt, position = 'center' }) {
   return (
-    <div>
-      <p className="font-display text-xl text-brand">{n}</p>
+    <div className="group">
+      <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-line shadow-sm">
+        <img
+          src={image}
+          alt={alt}
+          loading="lazy"
+          className="h-full w-full object-cover transition duration-700 ease-out group-hover:scale-105"
+          style={{ objectPosition: position }}
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand/30 via-transparent to-transparent"
+        />
+      </div>
+      <p className="mt-8 font-display text-xl text-brand">{n}</p>
       <div className="mt-4 h-px w-10 bg-brand/40" />
       <h3 className="mt-6 font-display text-2xl text-ink leading-snug">
         {title}
